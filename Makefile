@@ -1,6 +1,8 @@
 PDFLATEX=pdflatex
 
-default:
+default: paper.pdf
+
+paper.pdf: paper.tex paper.bib intro.tex history.tex machines.tex apps.tex dev.tex
 	$(PDFLATEX) paper
 	-bibtex paper
 	$(PDFLATEX) paper
