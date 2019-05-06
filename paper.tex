@@ -1,17 +1,21 @@
-\documentclass[preprint,12pt]{elsarticle}
+\documentclass[preprint,11pt]{elsarticle}
 \usepackage{epsfig}
 \usepackage{subfigure}
 \usepackage{setspace}
 \usepackage{url}
+\usepackage{colortbl}
+
 
 %\setlength{\textheight}{8.875in} \setlength{\textwidth}{6.5in}
 %\setlength{\topmargin}{0.0in} \setlength{\headheight}{0.0in}
 %\setlength{\headsep}{0.0in} \setlength{\oddsidemargin}{0.0in}
 
+\newcommand{\FIXME}[1]{\textcolor{red}{FIXME: #1}}
+
 \begin{document}
 
 \begin{frontmatter}
-\title{Multiple Accelerators: A Review of Early Work}
+\title{Architecturally Truly Diverse Systems: A Review}
 
 \author{Roger D. Chamberlain}
 \ead{roger@wustl.edu}
@@ -24,6 +28,7 @@
 \input{machines}
 \input{apps}
 \input{dev}
+\input{conclude}
 
 \bibliographystyle{elsarticle-num}
 \bibliography{paper}

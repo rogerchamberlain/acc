@@ -1,5 +1,86 @@
 \section{Introduction}
 \label{sec:intro}
 
-Reviews: GPU~\cite{mv15},
-FPGA~\cite{ch02,ecv16,Trimberger15}.
+The exploitation of Moore's Law~\cite{Moore65,Mack11}
+and Dennard Scaling~\cite{Dennard74,Bohr07}
+has enabled an unprecedented increase in computational capability over 
+approximately five decades. Smaller feature sizes in semiconductor
+technology, combined with greater power efficiency associated with each
+transistor, have resulted in a long stretch of time in which application
+performance greatly improved simply by waiting for the next generation
+of processors to be shipped.
+
+No longer. Since the early 2000s, the clock rates of individual processors
+have stayed relatively constant, and improved performance has primarily
+been due to a combination of speculative computation and parallelism.
+Speculative computation has been used to increase the performance of
+individual processor cores, and the number of cores on a processor chip
+has been expanding for over a decade.
+
+In addition to the transition of traditional processors into multicores,
+the past two decades have also seen the advent of accelerators, or
+architecturally diverse systems.  Here, a multicore processor is augmented
+with one or more specialized computational resources.  While most
+commonly graphics engines or reconfigurable logic, other accelerators
+that have seen significant use include digital signal processors
+and vector processors (e.g., Intel's Xeon Phi).
+
+Accelerators typically gain performance by exchanging generality for
+specificity. While general purpose processor cores try to be very good
+at everything, accelerators forego good performance on some computational
+tasks so that they can excel on a more limited set of target tasks.
+They accomplish this goal by specializing the computational data path,
+each in their own specific way.
+
+Graphics engines (or GPUs, graphics processing units) are now ubiquitous
+in the Top500 supercomputer lists.\footnote{https://www.top500.org}
+Graphics engines trade-off single thread performance (i.e., mimimum latency
+to execute a sequential set of instructions) for greater computational
+throughput on multiple threads.  A single fetch-decode unit controls a
+collection of execution units, each of which performs the same instruction
+on different data elements.  This enables the graphics engine to excel
+at regular dense matrix computations (e.g., vector-matrix multiplication)
+and other compute problems for which the same operation is to be performed
+on a large set of data.
+
+In 2015, Mittal and Vetter~\cite{mv15} surveyed techniques for effective
+computation using a combination of multicores and graphics engines. They
+consider systems in which the graphics engines are on a peripheral bus
+(typically PCIe in modern systems) as well as fused systems (both compute
+resources on a common chip).
+
+Reconfigurable logic (or FPGAs, field-programmable logic arrays) has been
+around for a longer time than graphics engines, but it has only recently come
+to be seen as a viable option for high performance computation.
+The unique advantage of reconfigurable logic is that the actual 
+structure of the data path can be altered to match the needs of the specific
+computation at hand.
+
+Compton and Hauck~\cite{ch02} described the state of reconfigurable logic
+targetting high performance computations back when the largest chips were
+capable of about one million equivalent logic gates.  Since then, capacities
+have increased 100-fold.  In addition, it is now common for reconfigurable
+logic chips to also have some chip area dedicated to specific functions (e.g.,
+memory, multipliers, etc.).
+
+More recently, Trimberger~\cite{Trimberger15} provides a retrospective on
+the first 30 years of reconfigurable logic technology, breaking it down into
+three ``ages,'' which he calls \emph{invention}, \emph{expansion}, and
+\emph{accumulation}.  Escobar et al.~\cite{ecv16} provide a comprehensive
+analysis of the use of reconfigurable logic in high performance computing.
+They extract features from families of high performance computing
+applications and assess their suitability for hardware implementation.
+
+Here, we review the use of multiple accelerators used to execute an individual
+application. \FIXME{Say more.}
+
+The paper is organized as follows.  Section~\ref{sec:history} describes
+the early history of multiple accelerator use.  Section~\ref{sec:machines}
+follows with a description of a number of machines that support multiple
+accelerators, both early machines and more recent machines.
+Section~\ref{sec:apps} lists several applications that have used
+multiple accelerators in their execution, including performance data
+whenever available.
+Section~\ref{sec:dev} then describes the collection of development
+environments that target multiple accelerator use, and
+Section~\ref{sec:conclude} concludes and describes future work.
