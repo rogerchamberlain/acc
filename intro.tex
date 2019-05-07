@@ -34,7 +34,7 @@ each in their own specific way.
 
 Graphics engines (or GPUs, graphics processing units) are now ubiquitous
 in the Top500 supercomputer lists.\footnote{https://www.top500.org}
-Graphics engines trade-off single thread performance (i.e., mimimum latency
+Graphics engines trade-off single thread performance (i.e., minimum latency
 to execute a sequential set of instructions) for greater computational
 throughput on multiple threads.  A single fetch-decode unit controls a
 collection of execution units, each of which performs the same instruction
@@ -57,7 +57,7 @@ structure of the data path can be altered to match the needs of the specific
 computation at hand.
 
 Compton and Hauck~\cite{ch02} described the state of reconfigurable logic
-targetting high performance computations back when the largest chips were
+targeting high performance computations back when the largest chips were
 capable of about one million equivalent logic gates.  Since then, capacities
 have increased 100-fold.  In addition, it is now common for reconfigurable
 logic chips to also have some chip area dedicated to specific functions (e.g.,
@@ -72,7 +72,12 @@ They extract features from families of high performance computing
 applications and assess their suitability for hardware implementation.
 
 Here, we review the use of multiple accelerators used to execute an individual
-application. \FIXME{Say more.}
+application. We describe early efforts in this area and then concentrate on
+how system designers and application developers have utilized multiple
+accelerators.  Moving forward, what properties (of both the application and
+the execution platform) are important in matching applications to platforms,
+and how can we perform the appropriate deployments with little or no
+explicit developer guidance.
 
 The paper is organized as follows.  Section~\ref{sec:history} describes
 the early history of multiple accelerator use.  Section~\ref{sec:machines}

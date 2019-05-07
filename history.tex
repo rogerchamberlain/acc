@@ -1,14 +1,44 @@
 \section{Early History}
 \label{sec:history}
 
-Hardware acceleration has a long history.  In 1984, Blank~\cite{Blank84}
+Hardware acceleration of applications has a long history.
+In 1984, Blank~\cite{Blank84}
 published a survey of hardware accelerators used in computer-aided design 
 that described a set of special-purpose engines going back nearly 20 years
 (the first being described in 1969~\cite{McKay69}).
+Blank describes accelerators for logic simulation, design rule checking,
+placement, and routing. These are all tasks that remain computationally
+expensive today, especially as digitial systems designs have grown in size
+and complexity.
 
-First FPGA and GPU~\cite{khdo06}.
+These accelerators were all dedicated hardware engines, capable only
+of executing the specific application for which they were originally designed
+and built. As a result, none of them were economically viable over any
+length of time.  During this time period, the march of technology (specifically
+the combination of Moore's Law and Dennard Scaling) quickly
+overcame any functionality-limited design.  It simply wasn't long
+before general-purpose machines became fast enough to eliminate the
+performance advantage that was available via hardware specialization.
 
-Early machine~\cite{kdh+06}.
+While the example give above was computer-aided design, there were similar
+efforts in other domains (e.g., LISP machines~\cite{lisp,alphalisp},
+Java machines~\cite{java,Schoeberl08}),
+all of which suffered a similar fate.
+
+Compare: GPU vs.~FPGA~\cite{bnw+10,cls+08,cmhm10,cz09,jpbc10,sww+10,tb10},
+PRNG~\cite{thl09,tb09}, SPICE~\cite{kd09}, image processing~\cite{amy09}.
+Productivity measures~\cite{jpbc10}.
+Early review~\cite{bdh+10}.
+
+The first known (to this author) combination of a graphics engine and
+reconfigurable logic used on a common problem was presented
+in two papers
+by Kelmelis et al.~\cite{khdo06,kdh+06} in 2006.  They used a pair of PCI cards
+(an EM Photonics Celerity card with a Xilinx Virtex-II FPGA and
+an NVIDIA GeForce 7800 GTX graphics card) to accelerate the execution of
+the finite-difference time-domain (FDTD) simulation of electromagnetic
+waves~\cite{khdo06} and nanoscale devices~\cite{kdh+06}.
+
 
 Development environment~\cite{cft+10},
 included FPGA hardware but no empirical FPGA results~\cite{dy08}.
@@ -18,10 +48,4 @@ Cluster~\cite{tl10}, cluster (w/GRAPE)~\cite{sbm+09}.
 Early applications~\cite{bkdb10,khdo06,shsc08,tl10}.
 
 Map-reduce~\cite{ytt+08} (both, but not simultaneously).
-
-Compare: GPU vs.~FPGA~\cite{bnw+10,cls+08,cmhm10,cz09,jpbc10,sww+10,tb10},
-PRNG~\cite{thl09,tb09}, SPICE~\cite{kd09}, image processing~\cite{amy09}.
-Productivity measures~\cite{jpbc10}.
-
-Early review~\cite{bdh+10}.
 
