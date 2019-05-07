@@ -8,7 +8,7 @@ that described a set of special-purpose engines going back nearly 20 years
 (the first being described in 1969~\cite{McKay69}).
 Blank describes accelerators for logic simulation, design rule checking,
 placement, and routing. These are all tasks that remain computationally
-expensive today, especially as digitial systems designs have grown in size
+expensive today, especially as digital systems designs have grown in size
 and complexity.
 
 These accelerators were all dedicated hardware engines, capable only
@@ -20,15 +20,44 @@ overcame any functionality-limited design.  It simply wasn't long
 before general-purpose machines became fast enough to eliminate the
 performance advantage that was available via hardware specialization.
 
-While the example give above was computer-aided design, there were similar
-efforts in other domains (e.g., LISP machines~\cite{lisp,alphalisp},
+While the example given above is computer-aided design, there were similar
+efforts in other domains (e.g., N-body simulations in astrophysics~\cite{grape},
+LISP machines~\cite{lisp,alphalisp},
 Java machines~\cite{java,Schoeberl08}),
 all of which suffered a similar fate.
 
-Compare: GPU vs.~FPGA~\cite{bnw+10,cls+08,cmhm10,cz09,jpbc10,sww+10,tb10},
-PRNG~\cite{thl09,tb09}, SPICE~\cite{kd09}, image processing~\cite{amy09}.
-Productivity measures~\cite{jpbc10}.
-Early review~\cite{bdh+10}.
+\subsection{Comparing Different Accelerators}
+
+There has been a significant amount of work dedicated to effectively
+using accelerators on a wide range of problems.  Excellent reviews
+include those by Mittal and Vetter~\cite{mv15} for graphics engines,
+Escobar et al.~\cite{ecv16} for reconfigurable logic, and
+Brodtkorb et al.~\cite{bdh+10} for three accelerators: graphics engines,
+reconfigurable logic, and Cell processors.
+
+Approximately a decade ago, there was a fair amount of research that
+went into comparing one accelerator with another.  The bulk of that
+work compared graphics engines to reconfigurable logic on a wide range
+of applications and/or application kernels.
+Examples include matrix multiplication and matrix-vector
+multiplication~\cite{cmhm10,jpbc10,sww+10},
+Gaussian elimination~\cite{cls+08},
+FFT~\cite{cmhm10},
+reduction~\cite{jpbc10},
+encryption~\cite{cls+08},
+image processing~\cite{amy09,bnw+10},
+lithography simulation~\cite{cz09},
+pseudo-random number generation~\cite{jpbc10,tb09,thl09},
+N-body simulation~\cite{jpbc10},
+computational biology~\cite{cls+08}, and
+computational finance~\cite{cmhm10,tb10}.
+
+Kapre and DeHon~\cite{kd09} compared the performance of graphics engines,
+reconfigurable logic, and Cell processors on a circuit simulation application,
+and Baker et al.~\cite{bgt07} did the same exploring matched filter
+computations.
+
+\subsection{First Use of Multiple Accelerators on a Common Problem}
 
 The first known (to this author) combination of a graphics engine and
 reconfigurable logic used on a common problem was presented
@@ -38,7 +67,25 @@ by Kelmelis et al.~\cite{khdo06,kdh+06} in 2006.  They used a pair of PCI cards
 an NVIDIA GeForce 7800 GTX graphics card) to accelerate the execution of
 the finite-difference time-domain (FDTD) simulation of electromagnetic
 waves~\cite{khdo06} and nanoscale devices~\cite{kdh+06}.
+In the electromagnetic wave simulation, the 2D problem was solved using
+the graphics engine, exploiting its greater memory bandwidth, while the 3D
+problem was solved using the reconfigurable logic, building a custom cache.
+As such, this problem doesn't yet meet our interest in using both
+accelerators on a common problem.
 
+In~\cite{kdh+06}, the authors describe what is believed to be the first
+ever use of multicores, graphics engines, and reconfigruable logic to execute
+a single application.  In the problem partitioning, the graphics engine is
+responsible for the mesh construction over the 3D space, which is a regular
+computation that maps well onto the graphics engine's data parallel pipelines.
+The reconfigurable logic is responsible for performing the field-update
+computations, which benefits from the custom cache designed to provide input
+data to the field updates.
+
+This combined machine was then used to execute a full-wave electromagnetic
+circuit simulation in which the graphics engine was used for coefficient
+calculations and matrix setup while the reconfigurable logic was responsible
+for the iterative matrix solver.
 
 Development environment~\cite{cft+10},
 included FPGA hardware but no empirical FPGA results~\cite{dy08}.
