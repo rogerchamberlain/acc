@@ -118,12 +118,35 @@ circuit simulation in which the graphics engine was used for coefficient
 calculations and matrix setup while the reconfigurable logic was responsible
 for the iterative matrix solver.
 
+\subsection{Other Early Uses of Multiple Accelerators}
+
+The second known example of using multiple accelerators on a common
+problem is the deployment of a financial Monte Carlo simulation 
+(a value-at-risk computation) on
+graphics engines and reconfigurable logic by Singla et al.~\cite{shsc08},
+described in 2008.
+The authors report a speedup of 74$\times$ relative to an 8-core implementation,
+using an NVIDIA GeForce GTX 260 as the graphics processor and
+a Xilinx Virtex-4 LX80 FPGA for the reconfigurable logic.
+The processors are 2.2~GHz AMD Opterons.
+
+In 2010, there were two publications that describe such deployments.
+First, Tsoi and Luk~\cite{tl10} deployed an N-body simulation application
+on the Axel cluster, a heterogeneous system in which each cluster node
+includes both reconfigurable logic and a graphics engine. The map-reduce
+framework is used to deploy applications on the Axel system.
+
+Second, Bauer et al.~\cite{bkdb10} deploy a video-based pedestrian
+detection problem on a PC system that includes a graphics card and
+in which the frame grabber board has an embedded reconfigurable logic chip.
+The reconfigurable logic is responsible for feature extraction and the
+graphics engine is responsible for classification (using a Gaussian
+kernel support vector machine).
+
 Development environment~\cite{cft+10},
 included FPGA hardware but no empirical FPGA results~\cite{dy08}.
 
 Cluster~\cite{tl10}, cluster (w/GRAPE)~\cite{sbm+09}.
-
-Early applications~\cite{bkdb10,khdo06,shsc08,tl10}.
 
 Map-reduce~\cite{ytt+08} (both, but not simultaneously).
 
