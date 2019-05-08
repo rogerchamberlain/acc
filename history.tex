@@ -39,15 +39,15 @@ Approximately a decade ago, there was a fair amount of research that
 went into comparing one accelerator with another.  The bulk of that
 work compared graphics engines to reconfigurable logic on a wide range
 of applications and/or application kernels.
-Examples include matrix multiplication and matrix-vector
-multiplication~\cite{cmhm10,jpbc10,sww+10},
-Gaussian elimination (GE)~\cite{cls+08},
+Examples include dense matrix multiplication~\cite{cmhm10,jpbc10},
+sparse matrix-vector multiplication~\cite{sww+10},
+Gaussian elimination~\cite{cls+08},
 FFT~\cite{cmhm10},
 reduction~\cite{jpbc10},
 encryption~\cite{cls+08},
 image processing~\cite{amy09,bnw+10},
 lithography simulation~\cite{cz09},
-pseudo-random number generation (PRNG)~\cite{jpbc10,tb09,thl09},
+pseudo-random number generation~\cite{jpbc10,tb09,thl09},
 N-body simulation~\cite{jpbc10},
 computational biology~\cite{cls+08}, and
 computational finance~\cite{cmhm10,tb10}.
@@ -59,26 +59,32 @@ computations.
 
 Table~\ref{tbl:compare} summarizes the majority of the
 reported results from these studies.
+The clear takeaway from this table is that there is no clear winner
+for all of these applications which accelerator gives the greater performance.
+It clearly depends on the properties of the application and the implementation.
 
 \begin{table}[ht]
 \centering
-\caption{Performance comparisons for different accelerators.}
+\caption{Performance comparisons for different accelerators on a variety of applications, all reported between 2007 and 2010.}
 \label{tbl:compare}
+\vspace{0.1in} 
 \begin{tabular}{c | c | c | c | c }
 \multirow{2}{*}{Application} & \multirow{2}{*}{Ref.} & Graphics & Reconfig. & \multirow{2}{*}{Notes} \\
   &   & Engine & Logic &  \\ \hline
-Matrix & \cite{cmhm10} & 541 & 1,491 & GFLOP/s\\
+matrix & \cite{cmhm10} & 541 & 1,491 & GFLOP/s\\
 multiply  & \cite{jpbc10} & 120$\times$ & 60$\times$ & speedup vs.~1 core\\ \hline
-Reduction  & \cite{jpbc10} & 120$\times$ & 80$\times$ & speedup vs.~1 core\\ \hline
-Image & \cite{amy09} & 100 & 600 & frames/s \\
+reduction  & \cite{jpbc10} & 120$\times$ & 80$\times$ & speedup vs.~1 core\\ \hline
+image & \cite{amy09} & 100 & 600 & frames/s \\
 processing & \cite{bnw+10} & 847 & 258 & frames/s \\ \hline
 lithography sim. & \cite{cz09} & 8$\times$ & 15$\times$ & speedup vs.~1 core\\ \hline
-\ & \cite{jpbc10} & 90$\times$ & 89$\times$ & speedup vs.~1 core\\ 
-PRNG  & \cite{tb09} & XX$\times$ & XX$\times$ & speedup vs.~1 core\\ 
-\ & \cite{thl09} & XX$\times$ & XX$\times$ & speedup vs.~1 core\\ 
+pseudo-random & \cite{jpbc10} & 90$\times$ & 89$\times$ & speedup vs.~1 core\\ 
+number  & \cite{tb09} & $3\times10^9$ & $26\times10^9$ & random numbers/s\\
+generation & \cite{thl09} & $14\times10^9$ & $44\times10^9$ & random numbers/s\\ \hline
 N-body sim.  & \cite{jpbc10} & 70$\times$ & 5$\times$ & speedup vs.~1 core\\ \hline
-Comp.& \cite{cmhm10} & 10,756 & 7,800 & Mopts/s\\
-finance  & \cite{tb10} & 50$\times$ & 162$\times$ & speedup vs.~1 core \\ 
+comp.& \cite{cmhm10} & 10,756 & 7,800 & Mopts/s\\
+finance  & \cite{tb10} & 50$\times$ & 162$\times$ & speedup vs.~1 core\\ \hline
+circuit sim. & \cite{kd09} & 131$\times$ & 182$\times$ & speedup vs.~1 core\\ \hline
+matched filter  & \cite{bgt07} & 6$\times$ & 2$\times$ & speedup vs.~1 core\\
 \end{tabular}
 \end{table}
 
@@ -88,7 +94,7 @@ The first known (to this author) combination of a graphics engine and
 reconfigurable logic used on a common problem was presented
 in two papers
 by Kelmelis et al.~\cite{khdo06,kdh+06} in 2006.  They used a pair of PCI cards
-(an EM Photonics Celerity card with a Xilinx Virtex-II FPGA and
+(an EM~Photonics Celerity card with a Xilinx Virtex-II FPGA and
 an NVIDIA GeForce 7800 GTX graphics card) to accelerate the execution of
 the finite-difference time-domain (FDTD) simulation of electromagnetic
 waves~\cite{khdo06} and nanoscale devices~\cite{kdh+06}.
@@ -99,7 +105,7 @@ As such, this problem doesn't yet meet our interest in using both
 accelerators on a common problem.
 
 In~\cite{kdh+06}, the authors describe what is believed to be the first
-ever use of multicores, graphics engines, and reconfigruable logic to execute
+ever use of multicores, graphics engines, and reconfigurable logic to execute
 a single application.  In the problem partitioning, the graphics engine is
 responsible for the mesh construction over the 3D space, which is a regular
 computation that maps well onto the graphics engine's data parallel pipelines.
