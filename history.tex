@@ -41,13 +41,13 @@ work compared graphics engines to reconfigurable logic on a wide range
 of applications and/or application kernels.
 Examples include matrix multiplication and matrix-vector
 multiplication~\cite{cmhm10,jpbc10,sww+10},
-Gaussian elimination~\cite{cls+08},
+Gaussian elimination (GE)~\cite{cls+08},
 FFT~\cite{cmhm10},
 reduction~\cite{jpbc10},
 encryption~\cite{cls+08},
 image processing~\cite{amy09,bnw+10},
 lithography simulation~\cite{cz09},
-pseudo-random number generation~\cite{jpbc10,tb09,thl09},
+pseudo-random number generation (PRNG)~\cite{jpbc10,tb09,thl09},
 N-body simulation~\cite{jpbc10},
 computational biology~\cite{cls+08}, and
 computational finance~\cite{cmhm10,tb10}.
@@ -56,6 +56,31 @@ Kapre and DeHon~\cite{kd09} compared the performance of graphics engines,
 reconfigurable logic, and Cell processors on a circuit simulation application,
 and Baker et al.~\cite{bgt07} did the same exploring matched filter
 computations.
+
+Table~\ref{tbl:compare} summarizes the majority of the
+reported results from these studies.
+
+\begin{table}[ht]
+\centering
+\caption{Performance comparisons for different accelerators.}
+\label{tbl:compare}
+\begin{tabular}{c | c | c | c | c }
+\multirow{2}{*}{Application} & \multirow{2}{*}{Ref.} & Graphics & Reconfig. & \multirow{2}{*}{Notes} \\
+  &   & Engine & Logic &  \\ \hline
+Matrix & \cite{cmhm10} & 541 & 1,491 & GFLOP/s\\
+multiply  & \cite{jpbc10} & 120$\times$ & 60$\times$ & speedup vs.~1 core\\ \hline
+Reduction  & \cite{jpbc10} & 120$\times$ & 80$\times$ & speedup vs.~1 core\\ \hline
+Image & \cite{amy09} & 100 & 600 & frames/s \\
+processing & \cite{bnw+10} & 847 & 258 & frames/s \\ \hline
+lithography sim. & \cite{cz09} & 8$\times$ & 15$\times$ & speedup vs.~1 core\\ \hline
+\ & \cite{jpbc10} & 90$\times$ & 89$\times$ & speedup vs.~1 core\\ 
+PRNG  & \cite{tb09} & XX$\times$ & XX$\times$ & speedup vs.~1 core\\ 
+\ & \cite{thl09} & XX$\times$ & XX$\times$ & speedup vs.~1 core\\ 
+N-body sim.  & \cite{jpbc10} & 70$\times$ & 5$\times$ & speedup vs.~1 core\\ \hline
+Comp.& \cite{cmhm10} & 10,756 & 7,800 & Mopts/s\\
+finance  & \cite{tb10} & 50$\times$ & 162$\times$ & speedup vs.~1 core \\ 
+\end{tabular}
+\end{table}
 
 \subsection{First Use of Multiple Accelerators on a Common Problem}
 
