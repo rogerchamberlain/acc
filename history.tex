@@ -21,7 +21,8 @@ before general-purpose machines became fast enough to eliminate the
 performance advantage that was available via hardware specialization.
 
 While the example given above is computer-aided design, there were similar
-efforts in other domains (e.g., N-body simulations in astrophysics~\cite{grape},
+efforts in other domains (e.g., N-body simulations in
+astrophysics~\cite{grapenature,grape},
 LISP machines~\cite{lisp,alphalisp},
 Java machines~\cite{java,Schoeberl08}),
 all of which suffered a similar fate.
@@ -120,11 +121,19 @@ for the iterative matrix solver.
 
 \subsection{Other Early Uses of Multiple Accelerators}
 
-The second known example of using multiple accelerators on a common
+A second example of simultaneous use of multiple accelerators was
+reported by Yeung et al.~\cite{ytt+08} in 2008.
+The authors propose the use of the map-reduce framework for heterogeneous
+systems, show the performance of a number of benchmarks (e.g., Monte Carlo
+simulation, European options pricing, cipher attack, N-body simulation)
+using each accelerator independently, and then show performance with
+combined use of both the graphics engine and the reconfigurable logic.
+
+The third known example of using multiple accelerators on a common
 problem is the deployment of a financial Monte Carlo simulation 
 (a value-at-risk computation) on
 graphics engines and reconfigurable logic by Singla et al.~\cite{shsc08},
-described in 2008.
+also described in 2008.
 The authors report a speedup of 74$\times$ relative to an 8-core implementation,
 using an NVIDIA GeForce GTX 260 as the graphics processor and
 a Xilinx Virtex-4 LX80 FPGA for the reconfigurable logic.
@@ -133,6 +142,7 @@ The processors are 2.2~GHz AMD Opterons.
 In 2010, there were two publications that describe such deployments.
 First, Tsoi and Luk~\cite{tl10} deployed an N-body simulation application
 on the Axel cluster, a heterogeneous system in which each cluster node
+(out of 16 total)
 includes both reconfigurable logic and a graphics engine. The map-reduce
 framework is used to deploy applications on the Axel system.
 
@@ -143,10 +153,39 @@ The reconfigurable logic is responsible for feature extraction and the
 graphics engine is responsible for classification (using a Gaussian
 kernel support vector machine).
 
-Development environment~\cite{cft+10},
-included FPGA hardware but no empirical FPGA results~\cite{dy08}.
+\subsection{Early Machines and Development Environments}
 
-Cluster~\cite{tl10}, cluster (w/GRAPE)~\cite{sbm+09}.
+In addition to the Axel cluster~\cite{tl10} mentioned above, another
+early machine that included both graphics engines and reconfigurable
+logic is the Quadro Plex (QP)~\cite{sep+09} cluster at NCSA.
+The QP, deployed in 2007,
+was a 16 node cluster in which each compute node contained two
+dual-core 2.4~GHz AMD Opterons, four NVIDIA Quadro FX 5600 graphics
+engines and one Nallatech H101-PCIX reconfigurable logic accelerator card.
+While~\cite{sep+09} describes several applications deployed on the cluster,
+they all appear to use one accelerator or the other, but not both.
 
-Map-reduce~\cite{ytt+08} (both, but not simultaneously).
+Kastl and Loimayr~\cite{kl10} described a machine designed to accelerate
+cryptanalytic algorithms.  However, in the initial publication the
+reconfigurable logic was not operational and any application testing
+was limited to graphics engine acceleration.
 
+Early development environments include Auto-Pipe~\cite{ftb+06,cft+10}
+and Harmony~\cite{dy08}.  Auto-Pipe was originally introduced in 2006
+as an environment for streaming applications supporting both traditional
+multicores and reconfigurable logic~\cite{ftb+06}, and was later extended
+to support graphics engines~\cite{cft+10}. This was the environment
+used by Singla et al.~\cite{shsc08}.
+
+The Harmony environment supports applications that have been decomposed into
+\emph{computer kernels} whose execution can be subject to explicit
+\emph{control decisions}~\cite{dy08}.
+As such, it has much in common with Auto-Pipe's
+streaming model, with a slightly richer set of topologies supported.
+While the design of Harmony includes reconfigurable logic support, the
+experimental evaluation provided in~\cite{dy08} is limited to multicores
+and graphics engines.
+
+The work described in this section was all published by 2010. In the
+sections that follow, we will concentrate on research that has been
+published since 2011.

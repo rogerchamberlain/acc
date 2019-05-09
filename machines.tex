@@ -1,7 +1,31 @@
 \section{Machines}
 \label{sec:machines}
 
-UIUC~\cite{sep+09}.
-Machines~\cite{admb14,ibs12,kl10,kdh+06,tl10,whk+13}.
-Embedded~\cite{rpm+15}.
+After the initial set of machines described in the previous section,
+a number of additional machines have been designed, built, and deployed
+that support multiple accelerators.
+
+In 2012, the Chimera system was described~\cite{ibs12}.
+It combined Intel multicores, NVIDIA Tesla C2070 graphics engines,
+and an Altera (now Intel) Stratix-IV reconfigurable logic card using
+the motherboard's PCIe bus. The authors describe approaches to deploying
+a variety of applications on the system. However, performance results
+are not provided.
+
+A multiple accelerator cluster built at the Center for Development of
+Advanced Computing (C-DAC) in Bangalore, India, was described in
+2014~\cite{admb14}. Here, the authors adapted the StarPU development
+environment~\cite{starpu} to support reconfigurable logic as well as
+simultaneous support of CUDA and OpenCL in the same application.
+A Monte Carlo simulation application is described, achieving a 22$\times$
+speedup relative to a Xeon processor.
+
+Also in 2014, Wu et al.~\cite{whk+14} describe a heterogeneous compute
+platform that has multicores, graphics engines, and reconfigurable logic
+that has a focus on power efficient computing.
+The authors explore four application examples, but similar to the QP
+machine, chose to exploit one accelerator type or another, but not both
+simultaneously.
+
 Cloud~\cite{pcc14}.
+Embedded~\cite{rpm+15}.
