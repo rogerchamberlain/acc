@@ -90,6 +90,29 @@ matched filter  & \cite{bgt07} & 6$\times$ & 2$\times$ & speedup vs.~1 core\\
 \end{tabular}
 \end{table}
 
+While which accelerator will win a head-to-head performance competition varies
+with application and implementation, a number of clear trends are evident
+from the work described in this section.  In particular, the three types
+of compute engine (multicores, graphics engines, and reconfigurable logic)
+each have their own strengths and weaknesses relative to the other two.
+These can be briefly stated as follows:
+\begin{itemize}
+\item {\bf Multicores} -- Strengths: generality, application portability,
+ease of programmability. Weaknesses: lowest parallelism of the group,
+rigid memory subsystem, low power efficiency.
+\item {\bf Graphics engines} -- Strengths: high parallelism (esp.~for data
+parallel problems), high density of floating-point units, high throughput
+memory (including coalesing). Weaknesses: rigid computational data path,
+limited suitability for a variety of applications.
+\item {\bf Reconfigurable logic} -- Strengths: extremely high flexibility,
+suitability for fine-grain parallelism, power efficiency.  Weaknesses: 
+difficulty of programmability, lower clock rate (necessitating greater
+parallelism to achieve similar performance).
+\end{itemize}
+
+While the above conclusions were based upon investigations completed
+by 2010, they are still as true today as they were then.
+
 \subsection{First Use of Multiple Accelerators on a Common Problem}
 
 The first known (to this author) combination of a graphics engine and
@@ -140,19 +163,25 @@ using an NVIDIA GeForce GTX 260 as the graphics processor and
 a Xilinx Virtex-4 LX80 FPGA for the reconfigurable logic.
 The processors are 2.2~GHz AMD Opterons.
 
-In 2010, there were two publications that describe such deployments.
+In 2010, there were three publications that describe such deployments.
 First, Tsoi and Luk~\cite{tl10} deployed an N-body simulation application
 on the Axel cluster, a heterogeneous system in which each cluster node
 (out of 16 total)
 includes both reconfigurable logic and a graphics engine. The map-reduce
 framework is used to deploy applications on the Axel system.
 
-Second, Bauer et al.~\cite{bkdb10} deploy a video-based pedestrian
+Second, Bauer et al.~\cite{bkdb10} deployed a video-based pedestrian
 detection problem on a PC system that includes a graphics card and
 in which the frame grabber board has an embedded reconfigurable logic chip.
 The reconfigurable logic is responsible for feature extraction and the
 graphics engine is responsible for classification (using a Gaussian
 kernel support vector machine).
+
+Third, Tse et al.~\cite{tttl10} deployed a pair of Monte Carlo simulation
+applications on a cluster with 8 Virtex-5 FPGAs and 8 Tesla C1060 GPUs.
+The asset simulation application achieved a speedup of 44$\times$ relative
+to a 16-node cluster of AMD quad-core 2.4~GHz multicores.  Energy efficiency
+improved almost 20-fold.
 
 \subsection{Early Machines and Development Environments}
 
@@ -189,4 +218,4 @@ and graphics engines.
 
 The work described in this section was all published by 2010. In the
 sections that follow, we will concentrate on research that has been
-published since 2011.
+published since then.
