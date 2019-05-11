@@ -1,46 +1,106 @@
 \section{Applications}
 \label{sec:apps}
 
-FPGA and GPU:
-nano sim~\cite{khdo06},
-MC sim~\cite{shsc08,tttl10},
-n-body sim~\cite{tl10},
-crypto~\cite{dfg+13},
-vision~\cite{bkdb10,ghgb11,brf14},
-astronomy (and discussion of dwarfs)~\cite{ibs12},
-astronomy (embedded in instrument)~\cite{kgb+14},
-cardiac optical mapping~\cite{mjk12},
-medical imaging~\cite{szb+12,sll13},
-image processing~\cite{dbd+13}.
-n-body, mm, fd, options~\cite{whk+14},
-toy MC sim~\cite{admb14},
-BLASTp~\cite{Papad14},
-combo HPC and embedded~\cite{rpm+15},
-image processing in embedded application~\cite{enr+18,nsg+16,zxl+18},
-data acquisition in science~\cite{cab+17,vac+16},
-GWAS~\cite{kws+16},
-GWIS~\cite{wkhe17},
-driver assistance~\cite{wlhk17}
-gene-gene interactions~\cite{wkhe18},
+The vast majority of the applications that have been deployed on
+more than one accelerator have combined graphics engines and reconfigurable
+logic as the two types of accelerator.
+Table~\ref{tbl:apps} summarizes the literature for these applications,
+indicating the application itself, the year of publication (including
+the citation), and various notes about the specific implementation.
+Particularly, for each application it is indicated whether (or not)
+the application assigns distinct functions to the two different
+accelerator types, and also whether (or not) the map-reduce programming
+model is used as part of the implementation.
 
-\begin{table}[ht]
+%FPGA and GPU:
+%nano sim~\cite{khdo06},
+%MC sim~\cite{shsc08,tttl10},
+%n-body sim~\cite{tl10},
+%crypto~\cite{dfg+13},
+%vision~\cite{bkdb10,ghgb11,brf14},
+%astronomy (and discussion of dwarfs)~\cite{ibs12},
+%astronomy (embedded in instrument)~\cite{kgb+14},
+%cardiac optical mapping~\cite{mjk12},
+%medical imaging~\cite{szb+12,sll13},
+%image processing~\cite{dbd+13}.
+%toy MC sim~\cite{admb14},
+%BLASTp~\cite{Papad14},
+%combo HPC and embedded~\cite{rpm+15},
+%image processing in embedded application~\cite{enr+18,nsg+16,zxl+18},
+%data acquisition in science~\cite{cab+17,vac+16},
+%GWAS~\cite{kws+16},
+%GWIS~\cite{wkhe17},
+%driver assistance~\cite{wlhk17}
+%gene-gene interactions~\cite{wkhe18},
+
+\begin{table}[htp]
 \centering
 \caption{Applications deployed on multiple accelerators.}
 \label{tbl:apps}
 \vspace{0.1in}
-\begin{tabular}{c | c | c | p{0.5\linewidth}}
+\begin{tabular}{p{0.15\linewidth} | c | c | p{0.6\linewidth}}
 Application & Ref. & Year & Notes \\ \hline
-EM sim & \cite{khdo06} & 2006 & First known example of a multiple accelerator application \\ \hline
-Monte & \cite{shsc08} & 2008 & Financial value-at-risk simulation. Built using Auto-Pipe development environment for streaming applications~\cite{ftb+06}  \\ \cline{2-4}
-Carlo & \cite{tttl10} & 2010 & \FIXME{What is this one?} \\ \cline{2-4}
-simulation & \cite{admb14} & 2014 & Computation of $\pi$ \\ \hline
-N-body & \cite{tl10} & 2010 & Introduced Axel cluster \\ \cline{2-4}
-simulation & \cite{whk+14} & 2014 & \FIXME{Add} \\ \hline
-\  & \cite{bkdb10} & 2010 & \FIXME{Add} \\ \cline{2-4}
-vision & \cite{ghgb11} & 2011 & \FIXME{Add} \\ \cline{2-4}
-\  & \cite{brf14} & 2014 & \FIXME{Add} \\ \hline
+EM sim & \cite{kdh+06} & 2006 & First known example$^*$ \\ \hline
+\multirow{4}{\linewidth}{Monte Carlo simulation} & \cite{ytt+08} & 2008 & European options pricing$^\dag$  \\ \cline{2-4}
+ & \cite{shsc08} & 2008 & Financial value-at-risk computation$^*$  \\ \cline{2-4}
+ & \cite{tttl10} & 2010 & Asian options and generalized asset pricing \\ \cline{2-4}
+ & \cite{admb14} & 2014 & Computation of $\pi$$^*$ \\ \hline
+\multirow{2}{\linewidth}{N-body simulation} & \cite{ytt+08} & 2008 & Dynamic workload distribution$^\dag$ \\ \cline{2-4}
+ & \cite{tl10} & 2010 & Introduced Axel cluster$^\dag$ \\ \hline
+\multirow{2}{\linewidth}{crypto} & \cite{ytt+08} & 2008 & Brute force key search$^\dag$ \\ \cline{2-4}
+ & \cite{dfg+13} & 2013 & Password search for PDF documents$^*$ \\ \hline
+\multirow{3}{*}{vision} & \cite{bkdb10} & 2010 & Pedestrian detection$^*$ \\ \cline{2-4}
+ & \cite{ghgb11} & 2011 & Stereo 3D video production$^*$ \\ \cline{2-4}
+ & \cite{brf14} & 2014 & Hand tracking$^*$ \\ \hline
+\multirow{4}{\linewidth}{medical imaging} & \cite{szb+12} & 2012 & \FIXME{Add} \\ \cline{2-4}
+ & \cite{mjk12} & 2012 & Cardiac mapping \\ \cline{2-4}
+ & \cite{sll13} & 2013 & \FIXME{Add} \\ \cline{2-4}
+ & \cite{rpm+15} & 2015 & Cone beam computed tomography \\ \hline
+\multirow{5}{\linewidth}{image processing} & \cite{dbd+13} & 2013 & \FIXME{Add} \\ \cline{2-4}
+ & \cite{rpm+15} & 2015 & Face recognition and number recognition \\ \cline{2-4}
+ & \cite{nsg+16} & 2016 & \FIXME{Add} \\ \cline{2-4}
+ & \cite{enr+18} & 2018 & \FIXME{Add} \\ \cline{2-4}
+ & \cite{zxl+18} & 2018 & \FIXME{Add} \\ \hline
+astronomy & \cite{kgb+14} & 2014 & \FIXME{Add} \\ \hline
+\multirow{4}{\linewidth}{comp bio} & \cite{Papad14} & 2014 & Protein-protein sequence alignment \\ \cline{2-4}
+ & \cite{kws+16} & 2016 & Genome-wide association studies \\ \cline{2-4}
+ & \cite{wkhe17} & 2017 & Genome-wide interation studies \\ \cline{2-4}
+ & \cite{wkhe18} & 2018 & Computation of gene-gene interations \\ \hline
+video & \cite{rpm+15} & 2015 & Video coding and motion tracking \\ \hline
+\multirow{2}{\linewidth}{data aquisition} & \cite{vac+16} & 2016 & \FIXME{Add} \\ \cline{2-4}
+ & \cite{cab+17} & 2017 & \FIXME{Add} \\ \hline
+driver assistance & \cite{wlhk17} & 2017 & \FIXME{Add} \\ \hline
 \end{tabular}
+$^*$Assigns distinct functions to the two accelerators. $^\dag$Utilizes map-reduce.
 \end{table}
+
+An example of partitioning the workload based on the distinct functions to be
+performed is described by Danczul et al.~\cite{dfg+13}. The authors are
+attempting a brute force attack on the password for a set of PDF encrypted
+files.  This requires both MD5 hash computations as well as RC4 stream cypher 
+computations.  They assign the MD5 hashes to the graphics engines, in part
+due to its limited memory requirements, and assign the RC4 computations to the
+reconfigurable logic (in which the memory requirements of the RC4 algorithm
+can be accommodated efficiently).
+
+A clear benefit of the map-reduce paradigm is that it is relatively
+straighforward to express the computational parallelism available in
+an algorithm using this approach.  Several applications took advantage
+of this.  In addition, it can also support the dynamic assignment of
+workload across the available computational resources, illustrated as
+early as 2008 by Yeung et al.~\cite{ytt+08}.
+
+For the set of Monte Carlo simulations listed in the table,
+4 of the 5 problems attempted
+(\cite{tttl10} includes two) are some form of financial computation.
+This hints at the strong interest in accelerated computation on the
+part of the financial industry.
+
+Any time multiple compute resources are used in an application, there is
+the potential for data movement between those resources to be a performance
+bottleneck.  Bittner et al.~\cite{brf14} demonstrate direct graphics engine
+to reconfigurable logic DMA data transfers over PCIe, avoiding a copy
+to/from the host memory.
 
 GPU and Phi:
 Jacobi relaxation~\cite{cv16}.
