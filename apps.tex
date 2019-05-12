@@ -45,19 +45,20 @@ EM sim & \cite{kdh+06} & 2006 & First known example$^*$ \\ \hline
  & \cite{shsc08} & 2008 & Financial value-at-risk computation$^*$  \\ \cline{2-4}
  & \cite{tttl10} & 2010 & Asian options and generalized asset pricing \\ \cline{2-4}
  & \cite{admb14} & 2014 & Computation of $\pi$$^*$ \\ \hline
-\multirow{2}{\linewidth}{N-body simulation} & \cite{ytt+08} & 2008 & Dynamic workload distribution$^\dag$ \\ \cline{2-4}
- & \cite{tl10} & 2010 & Introduced Axel cluster$^\dag$ \\ \hline
+\multirow{3}{\linewidth}{N-body simulation} & \cite{ytt+08} & 2008 & Dynamic workload distribution$^\dag$ \\ \cline{2-4}
+ & \cite{tl10} & 2010 & Introduced Axel cluster$^\dag$ \\ \cline{2-4}
+ & \cite{sm16} & 2016 & \FIXME{Add} \\ \hline
 \multirow{2}{\linewidth}{crypto} & \cite{ytt+08} & 2008 & Brute force key search$^\dag$ \\ \cline{2-4}
  & \cite{dfg+13} & 2013 & Password search for PDF documents$^*$ \\ \hline
 \multirow{3}{*}{vision} & \cite{bkdb10} & 2010 & Pedestrian detection$^*$ \\ \cline{2-4}
  & \cite{ghgb11} & 2011 & Stereo 3D video production$^*$ \\ \cline{2-4}
  & \cite{brf14} & 2014 & Hand tracking$^*$ \\ \hline
-\multirow{4}{\linewidth}{medical imaging} & \cite{szb+12} & 2012 & \FIXME{Add} \\ \cline{2-4}
+\multirow{4}{\linewidth}{medical imaging} & \cite{szb+12} & 2012 & Includes both static and dynamic assignment$^*$ \\ \cline{2-4}
  & \cite{mjk12} & 2012 & Cardiac mapping \\ \cline{2-4}
  & \cite{sll13} & 2013 & \FIXME{Add} \\ \cline{2-4}
- & \cite{rpm+15} & 2015 & Cone beam computed tomography \\ \hline
+ & \cite{rpm+15} & 2015 & Cone beam computed tomography$^*$ \\ \hline
 \multirow{5}{\linewidth}{image processing} & \cite{dbd+13} & 2013 & \FIXME{Add} \\ \cline{2-4}
- & \cite{rpm+15} & 2015 & Face recognition and number recognition \\ \cline{2-4}
+ & \cite{rpm+15} & 2015 & Face recognition and character recognition$^*$ \\ \cline{2-4}
  & \cite{nsg+16} & 2016 & \FIXME{Add} \\ \cline{2-4}
  & \cite{enr+18} & 2018 & \FIXME{Add} \\ \cline{2-4}
  & \cite{zxl+18} & 2018 & \FIXME{Add} \\ \hline
@@ -66,10 +67,11 @@ astronomy & \cite{kgb+14} & 2014 & \FIXME{Add} \\ \hline
  & \cite{kws+16} & 2016 & Genome-wide association studies \\ \cline{2-4}
  & \cite{wkhe17} & 2017 & Genome-wide interation studies \\ \cline{2-4}
  & \cite{wkhe18} & 2018 & Computation of gene-gene interations \\ \hline
-video & \cite{rpm+15} & 2015 & Video coding and motion tracking \\ \hline
+video & \cite{rpm+15} & 2015 & Video coding and motion tracking$^*$ \\ \hline
 \multirow{2}{\linewidth}{data aquisition} & \cite{vac+16} & 2016 & \FIXME{Add} \\ \cline{2-4}
  & \cite{cab+17} & 2017 & \FIXME{Add} \\ \hline
-driver assistance & \cite{wlhk17} & 2017 & \FIXME{Add} \\ \hline
+\multirow{2}{\linewidth}{driving} & \cite{wlhk17} & 2017 & Driver assistance \\ \cline{2-4}
+ & \cite{lzh+18} & 2018 & Autonomous vehicle computations$^*$ \\ \hline
 \end{tabular}
 $^*$Assigns distinct functions to the two accelerators. $^\dag$Utilizes map-reduce.
 \end{table}
@@ -83,6 +85,18 @@ due to its limited memory requirements, and assign the RC4 computations to the
 reconfigurable logic (in which the memory requirements of the RC4 algorithm
 can be accommodated efficiently).
 
+In a large fraction of the implementations where the workload is
+divided by function onto each accelerator, the computation is 
+organized as a pipeline.  Data flows into one accelerator, the portion
+of the work assigned to that accelerator is performed, the output
+of that pipeline stage then flows into the other accelerator, where
+the portion of the work assigned to that accelerator is performed.
+
+Sb\^{\i}rlea et al.~\cite{szb+12} extend this to general dataflow graphs,
+supporting a richer set of topolgies than just a simple pipeline.  The authors
+also incorporate the ability to support a work stealing scheduler across
+execution platforms.
+
 A clear benefit of the map-reduce paradigm is that it is relatively
 straighforward to express the computational parallelism available in
 an algorithm using this approach.  Several applications took advantage
@@ -91,7 +105,7 @@ workload across the available computational resources, illustrated as
 early as 2008 by Yeung et al.~\cite{ytt+08}.
 
 For the set of Monte Carlo simulations listed in the table,
-4 of the 5 problems attempted
+four of the five problems attempted
 (\cite{tttl10} includes two) are some form of financial computation.
 This hints at the strong interest in accelerated computation on the
 part of the financial industry.
