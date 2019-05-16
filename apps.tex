@@ -115,45 +115,60 @@ the potential for data movement between those resources to be a performance
 bottleneck.  Bittner et al.~\cite{brf14} demonstrate direct graphics engine
 to reconfigurable logic DMA data transfers over PCIe, avoiding a copy
 to/from the host memory.
+Ammendola et al.~\cite{abb+13} also exploit a combination of FPGAs and
+graphics engines; however, the FPGAs are not used for application functionality
+but instead are used to implement GPU to GPU communicationns.
 
-GPU and Phi:
+In the past decade, there has been a continuation of the research that
+seeks to compare one accelerator type with another. Examples of this
+that compare reconfigurable logic with graphics engines include:
+scientific computations~\cite{wghp11},
+compressed sensing and Cholesky decomposition~\cite{ypl12},
+sliding-window computations~\cite{cfbs15},
+microscopy~\cite{tzwz15},
+de novo assembly (in computational biology)~\cite{mjk+16},
+erasure coding~\cite{czs+16},
+database join~\cite{rl17},
+and data integration~\cite{fcb+19}.
+Caraba\~no et al.~\cite{cdde13} compare
+energy efficiency, performance, and productivity across accelerators, and
+V\'{e}stias and Neto~\cite{vn14} explore accelerator trends, particularly
+as they impact both peak performance and sustained performance.
+
+A number of investigations have concluded that which accelerator
+is preferred often depends upon the properties of the input data.
+Examples of applications for which this is true include:
+linear algebra~\cite{gchg16,sll+13},
+sparse matrix multiplication~\cite{gsbh16},
+and vision~\cite{mfo+16}.
+In general, the conclusions drawn in the previous decade (see
+Section~\ref{sec:compare}) still hold for this work as well.
+
+Graphics engines and reconfigurable logic are not the only accelerators
+available, however.  More recent investigations that have included the Cell in
+the mix include biological sequence alignment~\cite{bal+12}.
+Work comparing the Cell with graphics engines (but not including
+reconfigurable logic) includes
+wavelet transforms~\cite{bck+11},
+Bayesian analysis in bioinformatics~\cite{pts+12},
+molecular dynamics~\cite{pts+12}, and the TPC decision support
+benchmark~\cite{pts+12}.
+
+Research that compares graphics engines, reconfigurable logic and
+the Xeon Phi include an investigation of
+sparse matrix multiplication~\cite{gsbh16} as well as the development of
+predictive models for power and energy for all three
+execution platforms~\cite{opr+17}.
+Dropping reconfigurable logic from the comparison yields the following
+application investigations:
+Ising model simulation~\cite{ws13},
+microscopy~\cite{tkk+14},
+quantum chemistry~\cite{lrg14},
+quantum many-body simulations~\cite{Lyakh15}, and
 Jacobi relaxation~\cite{cv16}.
+Productivity, performance, and energy quantification is pursued
+by Memeti et al.~\cite{mlp+17}.
 
-%Move data to/from accelerator using compression (GPU and Phi)~\cite{bkp15}.
-
-FPGA present, but part of infrastructure, not application~\cite{abb+13}.
-
-Choose accelerator based on properties of input:
-%linear algebra~\cite{gchg16,sll+13},
-sparse matrix multiplication~\cite{gsbh16}. \FIXME{Add to table?}
-%vision~\cite{mfo+16}.
-
-%Compare FPGA with GPU:
-%scientific computations~\cite{wghp11},
-%Sliding-window computations~\cite{cfbs15},
-%de novo assembly (comp bio)~\cite{mjk+16},
-%optical flow~\cite{bnw+10}, quasi-MC sim~\cite{tb10},
-%microscopy~\cite{tzwz15}, erasure coding (OpenCL)~\cite{czs+16},
-%compressed sensing and Cholesky decomposition~\cite{ypl12},
-%peak performance and sustained performance~\cite{vn14},
-%energy efficiency, performance, and productivity~\cite{cdde13}.
-
-Database join (common language: OpenCL)~\cite{rl17}.
-
-%Compare FPGA, Cell, and GPU:
-%matched filter~\cite{bgt07}, SPICE~\cite{kd09}, Smith-Waterman~\cite{bal+12}.
-
-%Compare Cell and GPU:
-%wavelet transforms~\cite{bck+11}, CT reconstruction~\cite{skkh07},
-%PDE simulation~\cite{rd10},
-%bioinformatics, molecular dynamics, and database~\cite{pts+12}.
-
-%Compare FPGA, GPU, and Phi:
-%sparse matrix multiplication~\cite{gsbh16},
-%predictive models for power and energy~\cite{opr+17}.
-
-%Compare GPU and Phi:
-%microscopy~\cite{tkk+14}, Ising model~\cite{ws13},
-%quantum many-body simulation~\cite{Lyakh15},
-%quantum chemistry~\cite{lrg14},
-%productivity, performance, and energy~\cite{mlp+17}.
+We next turn our focus away from individual applications, and focus
+instead on the development environments that enable these applications
+to be designed, developed, deployed, and tested.
