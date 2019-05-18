@@ -19,7 +19,7 @@ low-level languages like Verilog and/or VHDL for reconfigurable logic
 design), and the addition of a second accelerator with potentially vastly
 different properties does nothing to make the task any easier.
 
-Probably the easiest place to make progress on this front is the judicious
+Probably the easiest place to make progress on this front is the
 development of libraries.  By encapsulating either a portion of the
 computation or some support function in a library, the application
 developer is relieved of the responsibility to implemement that functionality.
@@ -30,27 +30,59 @@ data transfers between GPUs and FPGAs).  In particular, PCIe transfers
 are made directly, device-to-device, without data being copied into
 the main memory of the multicore host. 
 
+For a second example, Moore et al.~\cite{mlk12} describe an implementation
+of the VSIPL++ signal processing library that supports both graphics engines
+and reconfigurable logic. The same source code can be used on a multicore
+as well as exploit available accelerators.
 
-Libraries:
-VSIPL++~\cite{mlk12}.
-CNNLab (for NN ML)~\cite{zlwx16}.
+As a third example, Zhu et al.~\cite{zlwx16} present CNNLab, a framework
+for neural network implementations that supports both graphics engines
+and reconfigurable logic. Each layer of the model is prescribed via an API.
 
-Language compilers:
-OpenCL~\cite{Ahmed11}.
-Liquid Metal~\cite{abb+12}.
-Data-flow~\cite{szb+12},
-FCUDA~\cite{pgs+13}.
-OpenACC~\cite{lkv16}.
+Finally, Abalenkovs et al.~\cite{aad+15} explore the performance of
+libraries for dense linear algebra deployed on multicores, graphics engines,
+and the Intel Xeon Phi.
 
-Us~\cite{blc17,cft+10,ctg+07,ftb+06,wcc12,wcc13}.
-Luk~\cite{ttpl10}.
+As a next step in the direction of simplifying application development,
+several groups have used what are, in effect, coordination languages.
+Here, the individual portions of the overall computation that is to be
+performed on an accelerator is programmed using native tools for that
+accelerator.  A coordination language is then used to stitch the whole
+application together.
+
+Examples of this approach include the Auto-Pipe system, which originally
+supported just multicores and reconfigurable logic~\cite{ftb+06}, but was
+later expanded to include graphics engines~\cite{cft+10};
+the Axel cluster~\cite{tl10}, which initially used the map-reduce
+framework for coordination,
+extended later to richer coordination capabilities~\cite{ttpl10};
+and a data-flow coordination model called Concurrent Collections~\cite{szb+12}.
+
+All of the approaches discussed so far still require some amount of
+the application to be developed in the low-level languages supported
+by the accelerators (a particularly problematic issue for reconfigurable
+logic).
+With the availability of OpenCL as a potential common language,
+Ahmed~\cite{Ahmed11} built the necessary infrastructure to enable
+a single OpenCL application to exploit both graphics engines and
+reconfigurable logic for a common application.
+The Liquid Metal project~\cite{abb+12} at IBM introduced a new language,
+Lime, a Java-compatible object-oriented language, that can be compiled
+for and executed on both graphics engines and reconfigurable logic.
+In these systems, the reconfigurable logic is expressed in a high-level
+language (either OpenCL or Lime, respectively) and a high level
+synthesis process is used to convert the source code into the gate-level
+designs necessary for deployment on reconfigurable logic.
+
+%FCUDA~\cite{pgs+13}.
+%OpenACC~\cite{lkv16}.
+
+Target multiple accelerators with common code:
+Kicherer et al~\cite{knbk12}.
+
 
 Choose accelerator based on properties of input:
 QUARK~\cite{hcy+14,hjl+15}.
-
-Target multiple accelerators with common code:
-dense linear algebra~\cite{daa+15},
-Kicherer et al~\cite{knbk12}.
 
 
 
