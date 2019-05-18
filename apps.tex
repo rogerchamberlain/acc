@@ -50,13 +50,15 @@ EM sim & \cite{kdh+06} & 2006 & First known example$^*$ \\ \hline
  & \cite{sm16} & 2016 & AWS GPUS plus local FPGA \\ \hline
 \multirow{2}{\linewidth}{crypto} & \cite{ytt+08} & 2008 & Brute force key search$^\dag$ \\ \cline{2-4}
  & \cite{dfg+13} & 2013 & Password search for PDF documents$^*$ \\ \hline
-\multirow{3}{*}{vision} & \cite{bkdb10} & 2010 & Pedestrian detection$^*$ \\ \cline{2-4}
- & \cite{ghgb11} & 2011 & Stereo 3D video production$^*$ \\ \cline{2-4}
+\multirow{2}{\linewidth}{machine learning} & \cite{bkdb10} & 2010 & Pedestrian detection$^*$ \\ \cline{2-4}
+ & \cite{log+18} & 2018 & Character recognition$^*$ \\ \hline
+\multirow{2}{*}{vision} & \cite{ghgb11} & 2011 & Stereo 3D video production$^*$ \\ \cline{2-4}
  & \cite{brf14} & 2014 & Hand tracking$^*$ \\ \hline
-\multirow{4}{\linewidth}{medical imaging} & \cite{szb+12} & 2012 & Includes both static and dynamic assignment$^*$ \\ \cline{2-4}
+\multirow{5}{\linewidth}{medical imaging} & \cite{szb+12} & 2012 & Includes both static and dynamic assignment$^*$ \\ \cline{2-4}
  & \cite{mjk12} & 2012 & Cardiac mapping \\ \cline{2-4}
  & \cite{sll13} & 2013 & Transmural electrophysiological imaging$^*$ \\ \cline{2-4}
- & \cite{rpm+15} & 2015 & Cone beam computed tomography$^*$ \\ \hline
+ & \cite{rpm+15} & 2015 & Cone beam computed tomography$^*$ \\ \cline{2-4}
+ & \cite{cwl18} & 2018 & Ultrasonic imaging$^*$ \\ \hline
 \multirow{5}{\linewidth}{image processing} & \cite{dbd+13} & 2013 & Pedestrian recognition$^*$ \\ \cline{2-4}
  & \cite{rpm+15} & 2015 & Face recognition and character recognition$^*$ \\ \cline{2-4}
  & \cite{nsg+16} & 2016 & Data acquisition for experimental physics$^*$ \\ \cline{2-4}
@@ -65,11 +67,13 @@ EM sim & \cite{kdh+06} & 2006 & First known example$^*$ \\ \hline
 astronomy & \cite{kgb+14} & 2014 & Radio antenna cross-correlation$^*$ \\ \hline
 \multirow{4}{\linewidth}{comp bio} & \cite{Papad14} & 2014 & Protein-protein sequence alignment$^*$ \\ \cline{2-4}
  & \cite{kws+16} & 2016 & Genome-wide association studies$^*$ \\ \cline{2-4}
- & \cite{wkhe17} & 2017 & Genome-wide interation studies$^*$ \\ \cline{2-4}
- & \cite{wkhe18} & 2018 & Computation of gene-gene interations$^*$ \\ \hline
+ & \cite{wkhe17} & 2017 & Genome-wide interaction studies$^*$ \\ \cline{2-4}
+ & \cite{wkhe19} & 2019 & Computation of gene-gene interactions$^*$ \\ \hline
 video & \cite{rpm+15} & 2015 & Video coding and motion tracking$^*$ \\ \hline
-\multirow{2}{\linewidth}{data aquisition} & \cite{vac+16} & 2016 & Linear accelerator$^*$ \\ \cline{2-4}
- & \cite{cab+17} & 2017 & Trigger systems for Large Hadron Collidor$^*$ \\ \hline
+\multirow{4}{\linewidth}{data acquisition} & \cite{vac+16} & 2016 & Linear accelerator$^*$ \\ \cline{2-4}
+ & \cite{cab+17} & 2017 & Trigger systems for Large Hadron Collider$^*$ \\ \cline{2-4}
+ & \cite{hzlw18} & 2018 & 3D waveform oscilloscope \\ \cline{2-4}
+ & \cite{crk+19} & 2019 & Linear accelerator$^*$ \\ \hline
 \multirow{2}{\linewidth}{driving} & \cite{wlhk17} & 2017 & Driver assistance (lane detection) \\ \cline{2-4}
  & \cite{lzh+18} & 2018 & Autonomous vehicle computations$^*$ \\ \hline
 \end{tabular}
@@ -93,12 +97,12 @@ of that pipeline stage then flows into the other accelerator, where
 the portion of the work assigned to that accelerator is performed.
 
 Sb\^{\i}rlea et al.~\cite{szb+12} extend this to general dataflow graphs,
-supporting a richer set of topolgies than just a simple pipeline.  The authors
+supporting a richer set of topologies than just a simple pipeline.  The authors
 also incorporate the ability to support a work stealing scheduler across
 execution platforms.
 
 A clear benefit of the map-reduce paradigm is that it is relatively
-straighforward to express the computational parallelism available in
+straightforward to express the computational parallelism available in
 an algorithm using this approach.  Several applications took advantage
 of this.  In addition, it can also support the dynamic assignment of
 workload across the available computational resources, illustrated as
@@ -117,7 +121,7 @@ to reconfigurable logic DMA data transfers over PCIe, avoiding a copy
 to/from the host memory.
 Ammendola et al.~\cite{abb+13} also exploit a combination of FPGAs and
 graphics engines; however, the FPGAs are not used for application functionality
-but instead are used to implement GPU to GPU communicationns.
+but instead are used to implement GPU to GPU communications.
 
 In the past decade, there has been a continuation of the research that
 seeks to compare one accelerator type with another. Examples of this
@@ -134,6 +138,10 @@ Caraba\~no et al.~\cite{cdde13} compare
 energy efficiency, performance, and productivity across accelerators, and
 V\'{e}stias and Neto~\cite{vn14} explore accelerator trends, particularly
 as they impact both peak performance and sustained performance.
+O'Neal and Brisk~\cite{ob18} provide predictive models for each of the
+constituent
+computational engines: multicores, graphics engines, and reconfigurable
+logic, quantifying both performance and power consumption.
 
 A number of investigations have concluded that which accelerator
 is preferred often depends upon the properties of the input data.
@@ -171,4 +179,4 @@ by Memeti et al.~\cite{mlp+17}.
 
 We next turn our focus away from individual applications, and focus
 instead on the development environments that enable these applications
-to be designed, developed, deployed, and tested.
+to be designed, implemented, deployed, tested, and executed.

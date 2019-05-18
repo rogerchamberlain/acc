@@ -1,13 +1,49 @@
-\section{Development Environments}
+\section{Development Tools}
 \label{sec:dev}
 
-Development environments (VSIPL++)~\cite{mlk12}.
+The general responsibilities associated with application development
+tools can be quite broad.  First, they might assist in the expression of
+the computation to be executed (either by supporting one or more languages
+or introducing a potentially new language).  Second, they might assist the
+execution of the application, often through resource management and/or
+scheduling.  We will consider each of these in turn.
+
+\subsection{Expression of the Application's Computation}
+
+Essentially, here we are interested in tools that help the application
+developer express the computation that is to be performed. Essentially, what
+must the programmer say to enable the execution platform to do what is
+desired.  Traditionally, application expression using even a single
+accelerator has been somewhat difficult (e.g., requiring the use of
+low-level languages like Verilog and/or VHDL for reconfigurable logic
+design), and the addition of a second accelerator with potentially vastly
+different properties does nothing to make the task any easier.
+
+Probably the easiest place to make progress on this front is the judicious
+development of libraries.  By encapsulating either a portion of the
+computation or some support function in a library, the application
+developer is relieved of the responsibility to implemement that functionality.
+
+As a first example, Thoma et al.~\cite{tdmp15} describe a framework for
+supporting accelerator to accelerator communications (specifically supporting
+data transfers between GPUs and FPGAs).  In particular, PCIe transfers
+are made directly, device-to-device, without data being copied into
+the main memory of the multicore host. 
+
+
+Libraries:
+VSIPL++~\cite{mlk12}.
+CNNLab (for NN ML)~\cite{zlwx16}.
+
+Language compilers:
 OpenCL~\cite{Ahmed11}.
+Liquid Metal~\cite{abb+12}.
+Data-flow~\cite{szb+12},
+FCUDA~\cite{pgs+13}.
+OpenACC~\cite{lkv16}.
+
 Us~\cite{blc17,cft+10,ctg+07,ftb+06,wcc12,wcc13}.
 Luk~\cite{ttpl10}.
-FPGA-GPU communications~\cite{brf14,tdm13,tdmp15}.
-Data-flow~\cite{szb+12},
-OpenACC~\cite{lkv16}.
 
 Choose accelerator based on properties of input:
 QUARK~\cite{hcy+14,hjl+15}.
@@ -16,9 +52,9 @@ Target multiple accelerators with common code:
 dense linear algebra~\cite{daa+15},
 Kicherer et al~\cite{knbk12}.
 
-FCUDA~\cite{pgs+13}.
 
-Liquid Metal~\cite{abb+12}.
+
+EngineCL~\cite{dng+19}.
 
 Resource management~\cite{bdm+13}.
 
