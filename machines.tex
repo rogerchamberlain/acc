@@ -1,7 +1,33 @@
 \section{Machines}
 \label{sec:machines}
 
-After the initial set of machines described in the previous section,
+The ability to physically construct a machine with multiple accelerators
+has never really been in question.  Frankly, they are straightforward to
+construct using readily available commercial components.
+Figure~\ref{fig:nodearch} illustrates the classic approach to such a design.
+Clusters of nodes of this style can be readily constructed using either
+Ethernet or Infiniband as the communication technology.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=0.75\linewidth]{nodearch}
+\caption{Individual node architecture for an multiple-accelerator system.}
+\label{fig:nodearch}
+\end{figure}
+
+In the figure, a multicore host is attached to a reconfigurable logic board
+and to a graphics engine via the host's I/O bus.  Current systems use
+PCIe as the I/O bus, however, some of the early systems described in
+the previous section used PCI-X.
+Each of the elements of the machine (the multicore, the reconfigurable
+logic, and the graphics engine) has its own physical memory.  It is common
+for reconfigurable logic boards to have both SRAM and DRAM on board.
+Since there is not, by default, a common address space that encompases
+all of these physical memories, data communications between execution
+engines can be a significant issue both in application development and
+performance.  We will come back to this point later.
+
+After the initial set of machines described above,
 a number of additional machines have been designed, built, and deployed
 that support multiple accelerators.
 
