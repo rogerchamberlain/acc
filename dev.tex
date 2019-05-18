@@ -77,25 +77,60 @@ designs necessary for deployment on reconfigurable logic.
 %FCUDA~\cite{pgs+13}.
 %OpenACC~\cite{lkv16}.
 
-Target multiple accelerators with common code:
-Kicherer et al~\cite{knbk12}.
+\subsection{Managing the Application's Execution}
 
+Given the ability to deploy various components of a problem onto distinct
+accelerators, Liu and Luk~\cite{ll11,ll12} provided an early study of how one
+should allocate problem components onto execution resources that include
+graphics engines and reconfigurable logic.  They explored
+three metrics: perfomance, energy efficiency, and temperature.
+This was expanded by Spacey et al.~\cite{slkk13} to describe a formal
+model for partitioning tasks across distributed hardware components.
+Their experimental work was performed on the Axel cluster~\cite{tl10},
+but was limited to multicores and reconfigurable logic, not including
+the graphics engines.
+L\"{o}sch and Platzner~\cite{lp17} present reMinMin, a scheduling technique
+that is focused on optimizing the total energy for a set of tasks executed
+across multicores, graphics engines, and reconfigurable logic.  They
+report experimental results for four applications, with the heuristic
+scheduling algorithm coming within 2\% of optimum in all cases that
+were investigated.
 
-Choose accelerator based on properties of input:
-QUARK~\cite{hcy+14,hjl+15}.
+Kicherer et al.~\cite{knbk12} come at the problem from a completely
+different perspective.  They are interested in the circumstance where an
+application is to be executed on any number of different hardware instances,
+some of which include accelerators and some not.  They describe an approach
+to enable these applications to be seamlessly portable, taking advantage of
+accelerators when present, but still executing correctly when not present.
 
+The above partitioning and mapping approaches result in static assignments.
+There has also been some work in the area of dynamic approaches.
+Bogda\'{n}ski et al.~\cite{blby11} use on-line machine learning techniques to
+dynamically adjust the computation as it proceeds.
+Karia and Lopez~\cite{kl17} provide a comprehensive overview of prior
+work in scheduling for heterogeneous system, and then propose their own,
+Alternative Processor within Threshold, to address some of the issues
+present in the prior work.
+Both of these groups used simulation
+of a multiple accelerator system for their quantitative evaluation.
 
+Belviranli et al.~\cite{bbg13} schedule loop iterations dynamically, resizing
+blocks as needed to prevent underutilization and load imbalance.
+Bolchini et al.~\cite{bdm+15} describe an approach that dedicates some of the
+computational resources to dynamic measurement of the current performance,
+feeding that information back into the scheduling decisions, effectively
+making the system self-adaptive.
+Both of the above groups
+evaluate their approaches on a pair of systems, one containing graphics
+engines and the other containing reconfigurable logic, but don't include
+a machine that contains both accelerators.
 
-EngineCL~\cite{dng+19}.
+An approach that addresses both the issues of application expression
+and application execution is EngineCL~\cite{dng+19}.  EngineCL is a
+high-level framework that provides load balancing across devices that
+are authored in OpenCL.  An experimental comparison of static versus
+dynamic load balancing approaches yields strong evidence for the
+improvements that are realizable with dynamic scheduling.
 
-Resource management~\cite{bdm+13}.
-
-Scheduling~\cite{kl17,lp17}.
-
-\subsection{Design Space Exploration}
-
-Luk~\cite{ll12,ll11,slkk13}.
-
-UCR~\cite{bbg13}.
-
-Scheduling (using simulator)~\cite{blby11}.
+%Choose accelerator based on properties of input:
+%QUARK~\cite{hcy+14,hjl+15}.

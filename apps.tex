@@ -4,7 +4,8 @@
 The vast majority of the applications that have been deployed on
 more than one accelerator have combined graphics engines and reconfigurable
 logic as the two types of accelerator.
-Table~\ref{tbl:apps} summarizes the literature for these applications,
+Tables~\ref{tbl:apps1} and~\ref{tbl:apps2} summarize
+the literature for these applications,
 indicating the application itself, the year of publication (including
 the citation), and various notes about the specific implementation.
 Particularly, for each application it is indicated whether (or not)
@@ -36,7 +37,7 @@ model is used as part of the implementation.
 \begin{table}[htp]
 \centering
 \caption{Applications deployed on multiple accelerators.}
-\label{tbl:apps}
+\label{tbl:apps1}
 \vspace{0.1in}
 \begin{tabular}{p{0.15\linewidth} | c | c | p{0.6\linewidth}}
 Application & Ref. & Year & Notes \\ \hline
@@ -52,15 +53,17 @@ EM sim & \cite{kdh+06} & 2006 & First known example$^*$ \\ \hline
  & \cite{dfg+13} & 2013 & Password search for PDF documents$^*$ \\ \hline
 \multirow{2}{\linewidth}{machine learning} & \cite{bkdb10} & 2010 & Pedestrian detection$^*$ \\ \cline{2-4}
  & \cite{log+18} & 2018 & Character recognition$^*$ \\ \hline
-\multirow{2}{*}{vision} & \cite{ghgb11} & 2011 & Stereo 3D video production$^*$ \\ \cline{2-4}
- & \cite{brf14} & 2014 & Hand tracking$^*$ \\ \hline
+\multirow{3}{*}{vision} & \cite{ghgb11} & 2011 & Stereo 3D video production$^*$ \\ \cline{2-4}
+ & \cite{brf14} & 2014 & Hand tracking$^*$ \\ \cline{2-4}
+ & \cite{rpm+15} & 2015 & Video coding and motion tracking$^*$ \\ \hline
 \multirow{5}{\linewidth}{medical imaging} & \cite{szb+12} & 2012 & Includes both static and dynamic assignment$^*$ \\ \cline{2-4}
  & \cite{mjk12} & 2012 & Cardiac mapping \\ \cline{2-4}
  & \cite{sll13} & 2013 & Transmural electrophysiological imaging$^*$ \\ \cline{2-4}
  & \cite{rpm+15} & 2015 & Cone beam computed tomography$^*$ \\ \cline{2-4}
  & \cite{cwl18} & 2018 & Ultrasonic imaging$^*$ \\ \hline
-\multirow{5}{\linewidth}{image processing} & \cite{dbd+13} & 2013 & Pedestrian recognition$^*$ \\ \cline{2-4}
+\multirow{6}{\linewidth}{signal and image processing} & \cite{dbd+13} & 2013 & Pedestrian recognition$^*$ \\ \cline{2-4}
  & \cite{rpm+15} & 2015 & Face recognition and character recognition$^*$ \\ \cline{2-4}
+ & \cite{akfh15} & 2015 & Real-time RF localization \FIXME{$^*$?} \\ \cline{2-4}
  & \cite{nsg+16} & 2016 & Data acquisition for experimental physics$^*$ \\ \cline{2-4}
  & \cite{enr+18} & 2018 & Add dynamic function distribution to above$^*$\\ \cline{2-4}
  & \cite{zxl+18} & 2018 & Increase frame rate to 9000 frames/s$^*$ \\ \hline
@@ -69,7 +72,17 @@ astronomy & \cite{kgb+14} & 2014 & Radio antenna cross-correlation$^*$ \\ \hline
  & \cite{kws+16} & 2016 & Genome-wide association studies$^*$ \\ \cline{2-4}
  & \cite{wkhe17} & 2017 & Genome-wide interaction studies$^*$ \\ \cline{2-4}
  & \cite{wkhe19} & 2019 & Computation of gene-gene interactions$^*$ \\ \hline
-video & \cite{rpm+15} & 2015 & Video coding and motion tracking$^*$ \\ \hline
+\end{tabular}
+$^*$Assigns distinct functions to the two accelerators. $^\dag$Utilizes map-reduce.
+\end{table}
+
+\begin{table}[tp]
+\centering
+\caption{Applications deployed on multiple accelerators (cont.).}
+\label{tbl:apps2}
+\vspace{0.1in}
+\begin{tabular}{p{0.15\linewidth} | c | c | p{0.6\linewidth}}
+Application & Ref. & Year & Notes \\ \hline
 \multirow{4}{\linewidth}{data acquisition} & \cite{vac+16} & 2016 & Linear accelerator$^*$ \\ \cline{2-4}
  & \cite{cab+17} & 2017 & Trigger systems for Large Hadron Collider$^*$ \\ \cline{2-4}
  & \cite{hzlw18} & 2018 & 3D waveform oscilloscope \\ \cline{2-4}
