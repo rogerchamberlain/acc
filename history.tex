@@ -8,7 +8,7 @@ that described a set of special-purpose engines going back nearly 20 years
 (the first being described in 1969~\cite{McKay69}).
 Blank describes accelerators for logic simulation, design rule checking,
 placement, and routing. These are all tasks that remain computationally
-expensive today, especially as digital systems designs have grown in size
+expensive today, especially as designs of digital systems have grown in size
 and complexity.
 
 These accelerators were all dedicated hardware engines, capable only
@@ -110,7 +110,7 @@ memory (including coalesing). Weaknesses: rigid computational data path,
 limited suitability for a variety of applications.
 \item {\bf Reconfigurable logic} -- Strengths: extremely high flexibility,
 suitability for fine-grain parallelism, power efficiency.  Weaknesses: 
-difficulty of programmability, lower clock rate (necessitating greater
+difficulty of programmability, lower clock rates (necessitating greater
 parallelism to achieve similar performance).
 \end{itemize}
 
@@ -130,7 +130,7 @@ waves~\cite{khdo06} and nanoscale devices~\cite{kdh+06}.
 In the electromagnetic wave simulation, the 2D problem was solved using
 the graphics engine, exploiting its greater memory bandwidth, while the 3D
 problem was solved using the reconfigurable logic, building a custom cache.
-As such, this problem doesn't yet meet our interest in using both
+As such, this problem didn't yet meet our interest in using both
 accelerators on a common problem.
 
 In~\cite{kdh+06}, the authors describe what is believed to be the first
@@ -183,13 +183,14 @@ kernel support vector machine).
 
 Third, Tse et al.~\cite{tttl10} deployed a pair of Monte Carlo simulation
 applications on a cluster with 8 Virtex-5 FPGAs and 8 Tesla C1060 GPUs.
-The asset simulation application achieved a speedup of 44$\times$ relative
+Their asset simulation application achieved a speedup of 44$\times$ relative
 to a 16-node cluster of AMD quad-core 2.4~GHz multicores.  Energy efficiency
 improved almost 20-fold.
 A first for this paper was the investigation of various scheduling policies
 for assignment of work to the various accelerators.
 
 \subsection{Early Machines and Development Environments}
+\label{sec:em}
 
 In addition to the Axel cluster~\cite{tl10} mentioned above, another
 early machine that included both graphics engines and reconfigurable

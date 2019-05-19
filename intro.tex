@@ -22,7 +22,7 @@ the past two decades have also seen the advent of accelerators, or
 architecturally diverse systems.  Here, a multicore processor is augmented
 with one or more specialized computational resources.  While most
 commonly graphics engines or reconfigurable logic, other accelerators
-that have seen significant use include digital signal processors
+that have seen use include digital signal processors
 and vector processors (e.g., Intel's Xeon Phi).
 
 Accelerators typically gain performance by exchanging generality for
@@ -34,7 +34,7 @@ each in their own specific way.
 
 Graphics engines (or GPUs, graphics processing units) are now ubiquitous
 in the Top500 supercomputer lists.\footnote{https://www.top500.org}
-Graphics engines trade-off single thread performance (i.e., minimum latency
+Graphics engines trade off single thread performance (i.e., minimum latency
 to execute a sequential set of instructions) for greater computational
 throughput on multiple threads.  A single fetch-decode unit controls a
 collection of execution units, each of which performs the same instruction
@@ -70,6 +70,8 @@ three ``ages,'' which he calls \emph{invention}, \emph{expansion}, and
 analysis of the use of reconfigurable logic in high performance computing.
 They extract features from families of high performance computing
 applications and assess their suitability for hardware implementation.
+Microsoft is now installing reconfigurable logic in its Azure cloud
+systems~\cite{ccp+16}.
 
 Here, we review the use of multiple accelerators used to execute an individual
 application. We describe early efforts in this area and then concentrate on
@@ -84,9 +86,8 @@ the early history of multiple accelerator use (roughly defined as 2010
 or before).  Section~\ref{sec:machines}
 follows with a description of a number of machines that support multiple
 accelerators, both early machines and more recent machines.
-Section~\ref{sec:apps} lists several applications that have used
-multiple accelerators in their execution, including performance data
-whenever available.
-Section~\ref{sec:dev} then describes the collection of development
+Section~\ref{sec:apps} lists a number of applications that have used
+multiple accelerators in their execution.
+Section~\ref{sec:dev} then describes development
 environments that target multiple accelerator use, and
 Section~\ref{sec:conclude} concludes and describes future work.

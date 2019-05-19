@@ -3,8 +3,58 @@
 
 \subsection{Conclusions}
 
+Over the past 15 years, there has been a growing interest in the use of
+multiple accelerators on individual applications, the utilization of
+\emph{truly} architecturally diverse systems.  The reasons for this
+are many, but the dominant consideration is that the benefits achievable
+through acceleration are strongly dependent upon the properties of the
+application as well as the properties of the implementation.
+
+Since applications are far from monolithic, by exploiting a different
+accelerator for different parts of an application, one can achieve
+better results overall than if the accelerator choice is limited to just
+a single option.
+
+While performance is still the dominant figure of merit, there is
+increasing interest in energy consumption and/or energy efficiency as
+an important consideration in how one wishes to deploy an application
+in production use.  Accelerators often provide strong advantages 
+in this circumstance, furthering the interest in their use.
+
 \subsection{Future Directions}
 
-AutoTVM.
+%AutoTVM.
 
-Debugging tools.
+As an application developer with over a decade of experience using
+architecturally diverse systems, there are a pair of things this
+author would like to see achieved in the future. Both items directly
+relate to the development tools available to authors of applications.
+
+First, the compiler technology, especially for reconfigurable logic,
+remains woefully behind the capabilities of compilers for traditional
+software systems.  Even things such as the degree of loop unrolling,
+which happens regularly and invisibly in software compilers, must be
+explicitly specified by the developer for high-level synthesis.
+
+The reason that parameters such as loop unrolling degree are exposed
+to application developers is that we don't yet understand the
+implications of the various choices prior to deployment and empirical
+measurement.  In the software world, the compiler has a reasonably
+well understood model of the implications of code generation choices
+that it makes.  This is simply not yet the case in the domain of
+high-level synthesis for reconfigurable logic.
+
+Second, debugging tools are simply in their infancy. Today, an
+application developer must use separate tools that are designed
+for the individual accelerator(s) in use.  At the very least, they
+have different user interfaces and modes of operation.  More
+seriously, the visibility that they provide into the operations
+of the application (especially those internal to an accelerator)
+are quite deficient.
+
+While there is clearly need for additional work, the fundamental
+forces that make truly architecturally diverse systems attractive
+are only getting stronger.  Dennard Scaling has essentially halted,
+and Moore's Law is slowing down.  Architectural diversity is one
+of the more promising approaches to addressing the challenges
+inherent in this modern reality.

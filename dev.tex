@@ -10,7 +10,7 @@ scheduling.  We will consider each of these in turn.
 
 \subsection{Expression of the Application's Computation}
 
-Essentially, here we are interested in tools that help the application
+Here we are interested in tools that help the application
 developer express the computation that is to be performed. Essentially, what
 must the programmer say to enable the execution platform to do what is
 desired.  Traditionally, application expression using even a single
@@ -22,7 +22,7 @@ different properties does nothing to make the task any easier.
 Probably the easiest place to make progress on this front is the
 development of libraries.  By encapsulating either a portion of the
 computation or some support function in a library, the application
-developer is relieved of the responsibility to implemement that functionality.
+developer is relieved of the responsibility to implement that functionality.
 
 As a first example, Thoma et al.~\cite{tdmp15} describe a framework for
 supporting accelerator to accelerator communications (specifically supporting
@@ -70,12 +70,23 @@ The Liquid Metal project~\cite{abb+12} at IBM introduced a new language,
 Lime, a Java-compatible object-oriented language, that can be compiled
 for and executed on both graphics engines and reconfigurable logic.
 In these systems, the reconfigurable logic is expressed in a high-level
-language (either OpenCL or Lime, respectively) and a high level
+language (either OpenCL or Lime, respectively) and a high-level
 synthesis process is used to convert the source code into the gate-level
 designs necessary for deployment on reconfigurable logic.
 
 %FCUDA~\cite{pgs+13}.
 %OpenACC~\cite{lkv16}.
+
+While high-level synthesis can be extremely beneficial in terms of
+enabling application developers to author their codes at a higher level
+of abstraction than was previously available, they are not without 
+continuing issues.  Cabrera and Chamberlain~\cite{cc19} recently
+investigated the implications of adjusting design parameters in OpenCL 
+implementations of the Needleman-Wunsch biosequence alignment algorithm.
+They reported performance variability on an Intel FPGA of over 100$\times$
+across different parameter configurations.
+Knowing how to tune the implementation is clearly crucial to achieving
+good performance.
 
 \subsection{Managing the Application's Execution}
 
@@ -83,7 +94,7 @@ Given the ability to deploy various components of a problem onto distinct
 accelerators, Liu and Luk~\cite{ll11,ll12} provided an early study of how one
 should allocate problem components onto execution resources that include
 graphics engines and reconfigurable logic.  They explored
-three metrics: perfomance, energy efficiency, and temperature.
+three metrics: performance, energy efficiency, and temperature.
 This was expanded by Spacey et al.~\cite{slkk13} to describe a formal
 model for partitioning tasks across distributed hardware components.
 Their experimental work was performed on the Axel cluster~\cite{tl10},
@@ -98,7 +109,7 @@ were investigated.
 
 Kicherer et al.~\cite{knbk12} come at the problem from a completely
 different perspective.  They are interested in the circumstance where an
-application is to be executed on any number of different hardware instances,
+application is to be executed on any number of different hardware platforms,
 some of which include accelerators and some not.  They describe an approach
 to enable these applications to be seamlessly portable, taking advantage of
 accelerators when present, but still executing correctly when not present.
