@@ -39,6 +39,11 @@ As a third example, Zhu et al.~\cite{zlwx16} present CNNLab, a framework
 for neural network implementations that supports both graphics engines
 and reconfigurable logic. Each layer of the model is prescribed via an API.
 
+For reconfigurable logic on the Zynq SoC, Xilinx supports the use of
+Python on the embedded processor core for coordination and library
+invocation (with the instantiation of the library functionality on the
+reconfigurable logic fabric).
+
 Finally, Abalenkovs et al.~\cite{aad+15} explore the performance of
 libraries for dense linear algebra deployed on multicores, graphics engines,
 and the Intel Xeon Phi.
@@ -74,19 +79,107 @@ language (either OpenCL or Lime, respectively) and a high-level
 synthesis process is used to convert the source code into the gate-level
 designs necessary for deployment on reconfigurable logic.
 
-%FCUDA~\cite{pgs+13}.
-%OpenACC~\cite{lkv16}.
+Most research into application development languages and systems for
+accelerators has focused on one accelerator.  When the target
+is a graphics engine, by far the most common two languages are
+CUDA and OpenCL. CUDA, being proprietary, is limited to NVIDIA graphics
+engines, while OpenCL, as an open standard, can be used across a much
+wider set of manufacturers' platforms.
+
+Both CUDA and OpenCL are primarily used to express data parallelism
+when targeting graphics engines, particularly regular computations
+on densely packed data structures. The MERCATOR system~\cite{cb17}
+attempts to widen the scope of applicability to irregular computations,
+such as manipulation of sparse data.
+While CUDA has been almost exclusively used for graphics engines,
+FCUDA~\cite{pgs+13} is a system that does a source-to-source translation
+of CUDA code to C (suitable for high-level synthesis), enabling CUDA
+applications to be deployed on reconfigurable logic.
+
+OpenACC is a directive-based approach to application expression,
+used initially for graphics engines, that has been adapted to support
+FPGAs~\cite{lkv16} via source-to-source translation into OpenCL.
+
+While historically the only way to realize efficient and performant
+applications on reconfigurable logic was to use a hardware description
+language (such as Verilog or VHDL), there are now a number of
+options for high-level synthesis tools that enable application expression
+at a level of abstraction much closer to that used in graphics engines
+or traditional processor cores.  OpenCL as a source language has already
+been mentioned above. Many others are based on C/C++ or a subset thereof.
+Table~\ref{tbl:tools} summarizes many of these tools,
+and Nane et al.~\cite{nsp+16}
+provide a broader survey of FPGA-specific tools.
+These high-level synthesis tools are now quite effective in
+practice, delivering reasonable performance with design effort
+comparable to graphics engine application
+development~\cite{zms+16,cc19,kenter19}.
+
+\begin{table}[ht]
+\centering
+\caption{Tools for application expression on accelerators.}
+\label{tbl:tools}
+\vspace{0.1in} 
+\begin{tabular}{c | c | c | c | c }
+\multirow{2}{*}{Tool} & \multirow{2}{*}{Ref.} & \multirow{2}{*}{License} & Input & Deployment \\
+  &   &   & Language(s) & Target(s)\\ \hline
+Auto-Pipe & \cite{cft+10} & academic & VHDL,CUDA & FPGA,GPU \\ \hline
+Liquid Metal  & \cite{abb+12} & commercial & Lime & FPGA,GPU \\ \hline
+OpenACC & \cite{lkv16} & academic & C/C++ & FPGA,GPU \\ \hline
+NVIDIA CUDA  & \cite{gems} & commercial & CUDA & GPU \\ \hline
+MERCATOR & \cite{cb17} & academic & CUDA & GPU \\ \hline
+DWARV & \cite{nso+12} & academic & C & FPGA \\ \hline
+FCUDA & \cite{pgs+13} & academic & CUDA & FPGA \\ \hline
+Intel HLS & & commercial & C/C++/OpenCL & FPGA \\ \hline
+LegUp & \cite{cca+13} & academic & C & FPGA \\ \hline
+Maxeler & \cite{maxj} & commercial & MaxJ & FPGA \\ \hline
+ROCCC & \cite{vpnh10} & academic & C & FPGA \\ \hline
+Vivado HLS & & commercial & C/C++/OpenCL & FPGA \\
+\end{tabular}
+\end{table}
+
 
 While high-level synthesis can be extremely beneficial in terms of
 enabling application developers to author their codes at a higher level
 of abstraction than was previously available, they are not without 
 continuing issues.  Cabrera and Chamberlain~\cite{cc19} recently
 investigated the implications of adjusting design parameters in OpenCL 
-implementations of the Needleman-Wunsch biosequence alignment algorithm.
+implementations of the Needleman-Wunsch biosequence alignment algorithm
+targeting reconfigurable logic.
 They reported performance variability on an Intel FPGA of over 100$\times$
 across different parameter configurations.
 Knowing how to tune the implementation is clearly crucial to achieving
 good performance.
+
+Productivity, performance, and energy quantification is pursued
+by Memeti et al.~\cite{mlp+17} for languages that can be deployed
+to graphics engines and the Xeon Phi. Their work compared OpenCL,
+OpenACC, OpenMP, and CUDA. They developed a developer productivity measure 
+that quantifies the fraction of code lines required for parallelization.
+Two things they conclude are: (1)~human factors are quite important
+(a fact well known in software development circles), and (2)~OpenMP
+generally requires less programmer effort that the other approaches.
+
+The European EXTRA project has investigated the issue of design space
+exploration for reconfigurable systems~\cite{extra,extra2}. The focus of this
+project has been reconfigurability at a courser granularity than traditional
+FPGAs (e.g., CGRAs, or course grained reconfigurable arrays), although
+the experimental deployments include FPGAs.
+A unique feature of this project is the explicit consideration of the
+need for effective reconfigurability, i.e., what is deployed on the
+accelerator will vary either during the execution of the application or
+between applications.
+A wide number of applications have been
+implemented~\cite{cns+15,zfl+16,akl+17}, as
+well as domain specific language approaches to application
+expression~\cite{lll16,itl17}.
+
+The take-home message from all of this is that if one's goal is to
+develop applications that can be deployed across both graphics engines
+and reconfigurable logic, one of the OpenCL variants (from Intel or Xilinx)
+is the most appropriate choice.  They both employ knowledge gained from
+the various academic efforts, and have matured into well-supported
+commercial tools.
 
 \subsection{Managing the Application's Execution}
 

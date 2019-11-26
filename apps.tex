@@ -48,7 +48,7 @@ EM sim & \cite{kdh+06} & 2006 & First known example$^*$ \\ \hline
  & \cite{admb14} & 2014 & Computation of $\pi$$^*$ \\ \hline
 \multirow{3}{\linewidth}{N-body simulation} & \cite{ytt+08} & 2008 & Dynamic workload distribution$^\dag$ \\ \cline{2-4}
  & \cite{tl10} & 2010 & Introduced Axel cluster$^\dag$ \\ \cline{2-4}
- & \cite{sm16} & 2016 & AWS GPUS plus local FPGA \\ \hline
+ & \cite{sm16} & 2016 & AWS GPUs plus local FPGA \\ \hline
 \multirow{2}{\linewidth}{crypto} & \cite{ytt+08} & 2008 & Brute force key search$^\dag$ \\ \cline{2-4}
  & \cite{dfg+13} & 2013 & Password search for PDF documents$^*$ \\ \hline
 \multirow{2}{\linewidth}{machine learning} & \cite{bkdb10} & 2010 & Pedestrian detection$^*$ \\ \cline{2-4}
@@ -56,10 +56,11 @@ EM sim & \cite{kdh+06} & 2006 & First known example$^*$ \\ \hline
 \multirow{3}{*}{vision} & \cite{ghgb11} & 2011 & Stereo 3D video production$^*$ \\ \cline{2-4}
  & \cite{brf14} & 2014 & Hand tracking$^*$ \\ \cline{2-4}
  & \cite{rpm+15} & 2015 & Video coding and motion tracking$^*$ \\ \hline
-\multirow{5}{\linewidth}{medical imaging} & \cite{szb+12} & 2012 & Includes both static and dynamic assignment$^*$ \\ \cline{2-4}
+\multirow{6}{\linewidth}{medical imaging} & \cite{szb+12} & 2012 & Includes both static and dynamic assignment$^*$ \\ \cline{2-4}
  & \cite{mjk12} & 2012 & Cardiac mapping \\ \cline{2-4}
  & \cite{sll13} & 2013 & Transmural electrophysiological imaging$^*$ \\ \cline{2-4}
  & \cite{rpm+15} & 2015 & Cone beam computed tomography$^*$ \\ \cline{2-4}
+ & \cite{tzwz15} & 2015 & Cryo-electron microscopy \\ \cline{2-4}
  & \cite{cwl18} & 2018 & Ultrasonic imaging$^*$ \\ \hline
 \multirow{6}{\linewidth}{signal and image processing} & \cite{dbd+13} & 2013 & Pedestrian recognition$^*$ \\ \cline{2-4}
  & \cite{rpm+15} & 2015 & Face recognition and character recognition$^*$ \\ \cline{2-4}
@@ -93,6 +94,15 @@ Application & Ref. & Year & Notes \\ \hline
 $^*$Assigns distinct functions to the two accelerators. $^\dag$Utilizes map-reduce.
 \end{table}
 
+A large fraction of the applications listed partition the
+workload across distinct functions. Out of 41 total applications, 29
+(or about 70\%)
+divide the application in this way.  These decisions on the part of the
+application developers reflect the reality that the different accelerators
+have distinct strengths and weaknesses, and different portions of the
+application can differently take advantage of those strengths and/or
+ameliorate the weaknesses.
+
 An example of partitioning the workload based on the distinct functions to be
 performed is described by Danczul et al.~\cite{dfg+13}. The authors are
 attempting a brute force attack on the password for a set of PDF encrypted
@@ -117,9 +127,14 @@ execution platforms.
 A clear benefit of the map-reduce paradigm is that it is relatively
 straightforward to express the computational parallelism available in
 an algorithm using this approach.  Several applications took advantage
-of this.  In addition, it can also support the dynamic assignment of
+of this (4 of 41, or about 10\% of those listed).
+In addition, it can also support the dynamic assignment of
 workload across the available computational resources, illustrated as
 early as 2008 by Yeung et al.~\cite{ytt+08}.
+This approach, however, has not been used for recent deployments, likely
+due to its inability to effectively exploit the particular advantages
+of each accelerator. If the workload is uniform, it stands to reason that
+a uniform architecture is the preferred deployment option.
 
 For the set of Monte Carlo simulations listed in the table,
 four of the five problems attempted
@@ -142,11 +157,12 @@ that compare reconfigurable logic with graphics engines include:
 scientific computations~\cite{wghp11},
 compressed sensing and Cholesky decomposition~\cite{ypl12},
 sliding-window computations~\cite{cfbs15},
-microscopy~\cite{tzwz15},
 de novo assembly (in computational biology)~\cite{mjk+16},
 erasure coding~\cite{czs+16},
 database join~\cite{rl17},
 and data integration~\cite{fcb+19}.
+The quantitative performance comparisons for these experiments are
+shown in Table~\ref{tbl:compare2}.
 Caraba\~no et al.~\cite{cdde13} compare
 energy efficiency, performance, and productivity across accelerators, and
 V\'{e}stias and Neto~\cite{vn14} explore accelerator trends, particularly
@@ -155,6 +171,28 @@ O'Neal and Brisk~\cite{ob18} provide predictive models for each of the
 constituent
 computational engines: multicores, graphics engines, and reconfigurable
 logic, quantifying both performance and power consumption.
+
+\begin{table}[ht]
+\centering
+\caption{Performance comparisons for graphics engines and reconfigurable
+logic, reported since 2010.}
+\label{tbl:compare2}
+\vspace{0.1in} 
+\begin{tabular}{c | c | c | c | c }
+\multirow{2}{*}{Application} & \multirow{2}{*}{Ref.} & Graphics & Reconfig. & \multirow{2}{*}{Notes} \\
+  &   & Engine & Logic &  \\ \hline
+Quantum MC& \multirow{2}{*}{\cite{wghp11}} & \multirow{2}{*}{$50 \times 10^6$} & \multirow{2}{*}{$90 \times 10^6$} & \multirow{2}{*}{interactions/s}\\
+simulation  & & & \\ \hline
+Cholesky & \multirow{2}{*}{\cite{ypl12}} & \multirow{2}{*}{38$\times$} & \multirow{2}{*}{15$\times$} & \multirow{2}{*}{speedup vs.~1 core}\\
+decomposition  & & & \\ \hline
+image convolution  & \cite{cfbs15} & 20 & 40 & frames/s\\ \hline
+genome alignment & \cite{mjk+16} & 13$\times$ & 115$\times$ & speedup vs.~1 core\\ \hline
+erasure coding & \cite{czs+16} & 3.9 & 1.2 & GB/s throughput\\ \hline
+database join & \cite{rl17} & 127 & 70 & $\mu$s for 8192 elements\\ \hline
+bio data conversion & \cite{fcb+19} & 5.3 & 15.3 & GB/s throughput\\ \hline
+ML data conversion & \cite{fcb+19} & 6.2 & 1.8 & GB/s throughput\\
+\end{tabular}
+\end{table}
 
 A number of investigations have concluded that which accelerator
 is preferred often depends upon the properties of the input data.
@@ -187,8 +225,28 @@ microscopy~\cite{tkk+14},
 quantum chemistry~\cite{lrg14},
 quantum many-body simulations~\cite{Lyakh15}, and
 Jacobi relaxation~\cite{cv16}.
+Performance data from some of the above systems is presented in
+Table~\ref{tbl:compare3}.
+As is the case for the previous comparisons, which accelerator has better
+performance is again a function of the properties of the application itself.
 Productivity, performance, and energy quantification is pursued
 by Memeti et al.~\cite{mlp+17}.
+
+\begin{table}[ht]
+\centering
+\caption{Performance comparisons for graphics engines and Xeon Phi.}
+\label{tbl:compare3}
+\vspace{0.1in} 
+\begin{tabular}{c | c | c | c | c }
+\multirow{2}{*}{Application} & \multirow{2}{*}{Ref.} & Graphics & Xeon & \multirow{2}{*}{Notes} \\
+  &   & Engine & Phi &  \\ \hline
+sparse matrix& \multirow{2}{*}{\cite{gsbh16}} & \multirow{2}{*}{60} & \multirow{2}{*}{59} & \multirow{2}{*}{Gflops/s}\\
+multiply  & & & \\ \hline
+Ising model & \multirow{2}{*}{\cite{ws13}} & \multirow{2}{*}{3.72} & \multirow{2}{*}{7.03} & \multirow{2}{*}{ns/spin for $L^{128}$ lattice}\\
+simulation  & & & \\ \hline
+Jacobi relaxation  & \cite{cv16} & 4.96 & 3.02 & speedup vs.~1 core\\
+\end{tabular}
+\end{table}
 
 We next turn our focus away from individual applications, and focus
 instead on the development environments that enable these applications

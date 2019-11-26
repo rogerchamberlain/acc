@@ -19,7 +19,8 @@ has been expanding for over a decade.
 
 In addition to the transition of traditional processors into multicores,
 the past two decades have also seen the advent of accelerators, or
-architecturally diverse systems.  Here, a multicore processor is augmented
+\emph{architecturally diverse} systems.
+Here, a multicore processor is augmented
 with one or more specialized computational resources.  While most
 commonly graphics engines or reconfigurable logic, other accelerators
 that have seen use include digital signal processors
@@ -72,6 +73,12 @@ They extract features from families of high performance computing
 applications and assess their suitability for hardware implementation.
 Microsoft is now installing reconfigurable logic in its Azure cloud
 systems~\cite{ccp+16}.
+
+In this paper, we are interested in exploring \emph{truly architecturally
+diverse} systems, by which we mean systems that include not just one, but
+two (or potentially more) distinct accelerators.  Most of these systems
+contain both graphics engines and reconfigurable logic, in addition to the
+traditional multicore that forms the base of the system.
 
 Here, we review the use of multiple accelerators used to execute an individual
 application. We describe early efforts in this area and then concentrate on

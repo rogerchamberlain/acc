@@ -26,12 +26,18 @@ astrophysics~\cite{grapenature,grape},
 LISP machines~\cite{lisp,alphalisp},
 Java machines~\cite{java,Schoeberl08}),
 all of which suffered a similar fate.
+A recent counterexample to this trend is the advent of customized
+architectures applied to convolutional neural network computations,
+e.g., the Tensor Processing Unit~\cite{tpu}.
 
 \subsection{Comparing Different Accelerators}
 \label{sec:compare}
 
+While dedicated purpose hardware acceleration has had limited success,
+accelerators that can be repurposed to multiple applications have seen
+substantially more utilization.
 There has been a significant amount of work dedicated to effectively
-using accelerators on a wide range of problems.  Excellent reviews
+using individual accelerators on a wide range of problems.  Excellent reviews
 include those by Mittal and Vetter~\cite{mv15} for graphics engines,
 Escobar et al.~\cite{ecv16} for reconfigurable logic, and
 Brodtkorb et al.~\cite{bdh+10} for three accelerators: graphics engines,
@@ -106,13 +112,21 @@ ease of programmability. Weaknesses: lowest parallelism of the group,
 rigid memory subsystem, low power efficiency.
 \item {\bf Graphics engines} -- Strengths: high parallelism (esp.~for data
 parallel problems), high density of floating-point units, high throughput
-memory (including coalesing). Weaknesses: rigid computational data path,
+memory (including coalescing). Weaknesses: rigid computational data path,
 limited suitability for a variety of applications.
 \item {\bf Reconfigurable logic} -- Strengths: extremely high flexibility,
 suitability for fine-grain parallelism, power efficiency.  Weaknesses: 
 difficulty of programmability, lower clock rates (necessitating greater
 parallelism to achieve similar performance).
 \end{itemize}
+
+The end result, not surprisingly, is that a particular accelerator sees
+performance benefits particularly when the needs of the application
+are a match with the capabilities of the accelerator.  E.g., high-volume
+floating-point multiplications on regular data structures are well
+suited to a graphics engine, while specialized bit-level manipulations
+are well suited to reconfigurable logic, in which the data path is
+customized the to specific needs of the application.
 
 While the above conclusions were based upon investigations completed
 by 2010, they are still as true today as they were then.
